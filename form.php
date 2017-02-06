@@ -1,5 +1,7 @@
 <?php
 
+include "header.php";
+
 $usr = "";
 $pass = "";
 $usrErr = "";
@@ -26,7 +28,6 @@ function sanitize_input($data) {
 ?>
 
 <div class="row align-items-center justify-content-center">
-
     <div class="my-login-box col-md-6 col-lg-4">
         <h1>Enter Wonderland!</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" autocomplete="off">
@@ -49,3 +50,5 @@ function sanitize_input($data) {
         <?php echo "<h2>Your Input:</h2> $usr <br> $pass";?>
     </div>
 </div>
+
+<?php include "footer.php";?>

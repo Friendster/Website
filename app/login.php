@@ -1,7 +1,7 @@
 <?php
 
-include "../include/header.php";
-include "../include/db.php";
+include "include/header.php";
+include "include/db.php";
 
 $usr = "";
 $pass = "";
@@ -87,4 +87,4 @@ function sanitize_input($data) {
     </div>
 </div>
 
-<?php include "../include/footer.php";?>
+<?php include "include/footer.php";?>

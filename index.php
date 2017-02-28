@@ -6,3 +6,4 @@
  * Time: 20:35
  */
 include "app/login.php";
+?>

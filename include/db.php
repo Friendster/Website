@@ -8,9 +8,9 @@
 
 function connect_to_db() {
     $servername = "localhost";
-    $username = "cris";
+    $username = "groupdefault";
     $password = "z#@S6Rs5hyw.";
-    $db = "phptutorial";
+    $db = "websecurity";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $db);

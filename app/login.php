@@ -1,7 +1,7 @@
 <?php
 
-include "header.php";
-include "db.php";
+include "../include/header.php";
+include "../include/db.php";
 
 $usr = "";
 $pass = "";
@@ -9,7 +9,7 @@ $usrErr = "";
 $passErr = "";
 $loginMsg = "";
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_POST["submit"])) {
     if (empty($_POST["usr"])) {
         $usrErr = "Required";
     } else {
@@ -24,28 +24,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // If user input is ok so far then QUERY db
     if ($usrErr === "" && $passErr === "") {
-        $loginMsg = "FAILED LOGIN!";
 
         // Connect to db
         $conn = connect_to_db();
 
         //http://php.net/manual/en/mysqli-stmt.get-result.php
 
-        $sql = "SELECT * FROM `adrielsi_crisdb`.`user` WHERE `username`=$usr";
+        $sql = "SELECT * FROM `user` WHERE `user`='$usr'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            echo $row["username"], $row["pass"];
+            echo $row["user"], $row["pass"];
 
-            if (password_verify($pass, $row["pass"])) {
+            //if (password_verify($pass, $row["pass"])) {
+            if($pass === $row["pass"]) {
                 $loginMsg = "SUCCESSFUL LOGIN!";
             } else {
                 $passErr = "Wrong password";
+                $loginMsg = $passErr;
             }
 
         } else {
             $usrErr = "Inexistent user";
+            $loginMsg = $usrErr;
         }
 
         $conn->close();
@@ -79,10 +81,10 @@ function sanitize_input($data) {
                     <?php echo $passErr;?>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" name="submit" class="btn btn-primary">Login</button>
         </form>
 
     </div>
 </div>
 
-<?php include "footer.php";?>
+<?php include "../include/footer.php";?>

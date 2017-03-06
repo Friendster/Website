@@ -1,3 +1,3 @@
-# Web Security
+# Friendster
 
-This repository holds exercises for the web security class.
+This repository contains the solution for the Web Security class assignment.

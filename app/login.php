@@ -37,8 +37,8 @@ if(isset($_POST["submit"])) {
             $row = $result->fetch_assoc();
             echo $row["user"], $row["pass"];
 
-            //if (password_verify($pass, $row["pass"])) {
-            if($pass === $row["pass"]) {
+            if (password_verify($pass, $row["pass"])) {
+//            if($pass === $row["pass"]) {
                 $loginMsg = "SUCCESSFUL LOGIN!";
             } else {
                 $passErr = "Wrong password";
@@ -81,6 +81,9 @@ function sanitize_input($data) {
                     <?php echo $passErr;?>
                 </div>
             </div>
+
+            <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD" data-theme="dark"></div>
+
             <button type="submit" name="submit" class="btn btn-primary">Login</button>
         </form>
 

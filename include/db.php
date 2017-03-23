@@ -8,15 +8,15 @@
 
 function connect_to_db() {
     $servername = "localhost";
-    $username = "groupdefault";
-    $password = "z#@S6Rs5hyw.";
+    $username = "root";//"groupdefault";
+    $password = "root";//"z#@S6Rs5hyw.";
     $db = "websecurity";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $db);
 
     // Check connection
-    if (!$conn) {
+    if ($conn->error) {
         die("DB connection failed. Error " . $conn->connect_errno . " " . $conn->connect_error);
     }
     return $conn;

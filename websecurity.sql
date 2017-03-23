@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Feb 28, 2017 at 09:47 AM
+-- Generation Time: Mar 23, 2017 at 01:50 PM
 -- Server version: 5.5.49-log
 -- PHP Version: 7.0.9
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `phptutorial`
+-- Database: `websecurity`
 --
 
 -- --------------------------------------------------------
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
   `user` varchar(32) NOT NULL,
-  `pass` varchar(32) NOT NULL
+  `pass` varchar(120) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
@@ -37,10 +37,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `user`, `pass`) VALUES
-(1, 'cris', 'crispass'),
-(3, 'adri', 'pass'),
-(4, 'batman', 'pass'),
-(5, 'superman', 'pass');
+(1, 'cris', '$2y$10$7G.1pJ.MobWrPGH/smVHTut.QDLn9ZoVcavUIUX84BCEXDZUtfDK2'),
+(3, 'adri', '$2y$10$7G.1pJ.MobWrPGH/smVHTut.QDLn9ZoVcavUIUX84BCEXDZUtfDK2'),
+(4, 'batman', '$2y$10$7G.1pJ.MobWrPGH/smVHTut.QDLn9ZoVcavUIUX84BCEXDZUtfDK2'),
+(5, 'superman', '$2y$10$7G.1pJ.MobWrPGH/smVHTut.QDLn9ZoVcavUIUX84BCEXDZUtfDK2');
 
 --
 -- Indexes for dumped tables

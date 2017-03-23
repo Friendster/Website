@@ -10,7 +10,7 @@ function connect_to_db() {
     $servername = "localhost";
     $username = "root";//"groupdefault";
     $password = "root";//"z#@S6Rs5hyw.";
-    $db = "websecurity";
+    $db = "friendster";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $db);

@@ -10,6 +10,20 @@ $passErr = "";
 $loginMsg = "";
 
 if(isset($_POST["submit"])) {
+
+    //echo "RECAPCHA response " . $_POST["g-recaptcha-response"];
+
+    g_recaptcha($_POST["g-recaptcha-response"]);
+
+
+
+
+
+
+
+
+
+
     if (empty($_POST["usr"])) {
         $usrErr = "Required";
     } else {
@@ -57,6 +71,32 @@ if(isset($_POST["submit"])) {
 function sanitize_input($data) {
     $data = htmlspecialchars($data);
     return $data;
+}
+
+
+function g_recaptcha($response) {
+    $secret = "6LcpFBoUAAAAALNJMzRqz3XcQHW3XHl_IpC11xeU";
+
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = array(
+        'secret' => $secret,
+        'response' => $response
+    );
+    $options = array(
+        'http' => array (
+            'method' => 'POST',
+            'header'=>"Content-Type: application/x-www-form-urlencoded\r\n",
+            'content' => http_build_query($data)
+        )
+    );
+    $context  = stream_context_create($options);
+    $verify = file_get_contents($url, false, $context);
+    $captcha_success=json_decode($verify);
+    if ($captcha_success->success==false) {
+        echo "<p>You are a bot! Go away!</p>";
+    } else if ($captcha_success->success==true) {
+        echo "<p>You are not a bot!</p>";
+    }
 }
 ?>
 

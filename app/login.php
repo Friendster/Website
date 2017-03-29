@@ -1,7 +1,7 @@
 <?php
 
-include "include/header.php";
-include "include/db.php";
+include "../include/header.php";
+include "../include/db.php";
 
 $usr = "";
 $pass = "";
@@ -14,15 +14,6 @@ if(isset($_POST["submit"])) {
     //echo "RECAPCHA response " . $_POST["g-recaptcha-response"];
 
     g_recaptcha($_POST["g-recaptcha-response"]);
-
-
-
-
-
-
-
-
-
 
     if (empty($_POST["usr"])) {
         $usrErr = "Required";
@@ -130,4 +121,4 @@ function g_recaptcha($response) {
     </div>
 </div>
 
-<?php include "include/footer.php";?>
+<?php include "../include/footer.php";?>

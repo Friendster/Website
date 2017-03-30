@@ -13,6 +13,7 @@ if (isset($_POST['submit']))
     // Connect to db
     $conn = connect_to_db();
 
+
     echo "TESTING THE SUBMIT" . "<br>";
     //assign user-provided data to variables
     $email = $_POST['email'];
@@ -30,30 +31,39 @@ if (isset($_POST['submit']))
 
 
     $options = [
-        'cost' => 11,
-        'salt' => $salt,
+        'cost' => 11
     ];
     $hashed_pw = password_hash($password, PASSWORD_BCRYPT, $options);
-
-
+    $hashed_pw = base64_encode($hashed_pw);
+    echo password_verify($password, base64_encode($hashed_pw));
+    if(password_verify($password, base64_decode($hashed_pw))){
+        echo"This Pineapple";
+    }
     echo $hashed_pw . "<br>";
 
 
-
-
-    //encrypt password with the db salt
-    $password = crypt($password, $salt);
-
     //creation of variable with the information and db specifics to be injected into db
-    $query = "INSERT INTO user (user, pass)";
-    $query .= "VALUES('{$email}','{$password}')";
+    $query = "INSERT INTO user (user, pass) VALUES(?, ?)";
 
-    //execution on the information injection into the db
-    $register_user_query = mysqli_query($conn, $query);
-    if (!$register_user_query)
+    $stmt = $conn->stmt_init();
+
+
+    if(!$stmt->prepare($query))
     {
-        die("Query failed!". mysqli_error($conn) . ' '. mysqli_errno($conn));
+        print "Failed to prepare statement\n";
     }
+    else
+    {
+
+        $stmt->bind_param('ss', $email, $hashed_pw);
+
+        //execution on the information injection into the db
+        $stmt->execute();
+
+    }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
 
@@ -78,6 +88,7 @@ if (isset($_POST['submit']))
             <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD" data-theme="dark"></div>
 
             <button type="submit" name="submit" class="btn btn-primary">Register</button>
+            <a class="btn btn-default" href="login.php">Login</a>
         </form>
 
     </div>

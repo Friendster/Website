@@ -40,12 +40,14 @@ if(isset($_POST["submit"])) {
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            echo $row["user"], $row["pass"];
+            echo $row["user"], "______", $row["pass"];
 
-            if (password_verify($pass, $row["pass"])) {
-//            if($pass === $row["pass"]) {
+            $hashed_pw = $row["pass"];
+//            if (password_verify('q', base64_decode('JDJ5JDExJC5mSnlCRkZjQVZIRzMyeUxN'))) {
+            if (password_verify($pass, base64_decode($hashed_pw))) {
                 $loginMsg = "SUCCESSFUL LOGIN!";
             } else {
+                echo $pass, "______";
                 $passErr = "Wrong password";
                 $loginMsg = $passErr;
             }
@@ -115,8 +117,9 @@ function g_recaptcha($response) {
 
             <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD" data-theme="dark"></div>
 
-            <a class="btn btn-default" href="app/register.php">Register?</a>
+
             <button type="submit" name="submit" class="btn btn-primary">Login</button>
+            <a class="btn btn-default" href="register.php">Register?</a>
         </form>
 
     </div>

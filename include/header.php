@@ -16,7 +16,7 @@ echo '
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="http://188.226.140.147/Friendster/css/mystyle.css" type="text/css">
+    <link rel="stylesheet" href="http://188.226.140.147/css/mystyle.css" type="text/css">
     
     <!-- Google reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js"></script>

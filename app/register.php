@@ -8,7 +8,6 @@
 include "../include/header.php";
 include "../include/db.php";
 
-
 if (isset($_POST['submit']))
 {
     // Connect to db
@@ -19,27 +18,28 @@ if (isset($_POST['submit']))
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    echo $email. "<br>";
-    echo $password . "<br>";
-
     // Escape user input data
     $email = mysqli_escape_string($conn, $email);
     $password = mysqli_escape_string($conn, $password);
 
-    //creation of query for our salt
-    $query = "SELECT randSalt FROM user";
+    echo $email. "<br>";
+    echo $password . "<br>";
 
-    //execution of the salt query
-    $select_randsalt_query = mysqli_query($conn, $query);
-    if (!$select_randsalt_query)
-    {
-        die("Query failed!". mysqli_error($conn));
-    }
+    $salt = mcrypt_create_iv(22, MCRYPT_DEV_URANDOM);
+    echo $salt. "<br>";
 
-    $row = mysqli_fetch_array($select_randsalt_query);
 
-    //copy db salt into variable
-    $salt = $row['randSalt'];
+    $options = [
+        'cost' => 11,
+        'salt' => $salt,
+    ];
+    $hashed_pw = password_hash($password, PASSWORD_BCRYPT, $options);
+
+
+    echo $hashed_pw . "<br>";
+
+
+
 
     //encrypt password with the db salt
     $password = crypt($password, $salt);

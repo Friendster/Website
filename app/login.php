@@ -115,6 +115,7 @@ function g_recaptcha($response) {
 
             <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD" data-theme="dark"></div>
 
+            <a class="btn btn-default" href="app/register.php">Register?</a>
             <button type="submit" name="submit" class="btn btn-primary">Login</button>
         </form>
 

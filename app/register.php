@@ -6,7 +6,7 @@
  */
 
 include "../include/header.php";
-include "../include/db.php";
+include "../include/init.php";
 
 if (isset($_POST['submit']))
 {

@@ -1,7 +1,7 @@
 <?php
 
 include "../include/header.php";
-include "../include/db.php";
+include "../include/init.php";
 
 $usr = "";
 $pass = "";
@@ -10,8 +10,6 @@ $passErr = "";
 $loginMsg = "";
 
 if(isset($_POST["submit"])) {
-
-    //echo "RECAPCHA response " . $_POST["g-recaptcha-response"];
 
     g_recaptcha($_POST["g-recaptcha-response"]);
 

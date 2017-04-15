@@ -1,14 +1,26 @@
 @import "variables";
 
 body {
-
-  background: @theme-bg url("../img/bg.jpg") no-repeat fixed center;
+  background: @bg url("../img/bg.jpg") no-repeat fixed center;
   background-size: cover;
   //background: background-color background-image background-repeat background-attachment background-position;
 }
 
 .my-login-box {
-  margin-top: 3em;
+  width: 385px;
+  margin: 3em auto;
   padding: 3em 2.5em;
-  background-color: fade(@theme-bg, 70%);
+  background-color: fade(@bg, 70%);
+}
+
+.recapcha-error {
+  border: 1px solid @brand-danger;
+  padding: 0.6em;
+}
+
+.form-buttons {
+  margin-top: 1em;
+  * {
+    margin-right: 1em;
+  }
 }

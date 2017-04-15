@@ -3,7 +3,18 @@ body {
   background-size: cover;
 }
 .my-login-box {
-  margin-top: 3em;
+  width: 385px;
+  margin: 3em auto;
   padding: 3em 2.5em;
   background-color: rgba(245, 244, 244, 0.7);
+}
+.recapcha-error {
+  border: 1px solid #e51c23;
+  padding: 0.6em;
+}
+.form-buttons {
+  margin-top: 1em;
+}
+.form-buttons * {
+  margin-right: 1em;
 }

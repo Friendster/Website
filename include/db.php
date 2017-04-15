@@ -7,13 +7,14 @@
  */
 
 function connect_to_db() {
-    $servername = "188.226.140.147";
+    $servername = "127.0.0.1";
     $username = "root";
     $password = "db#2IsAw3s0me";
     $db = "friendster";
+    $port = "3306";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $db);
+    $conn = new mysqli($servername, $username, $password, $db, $port);
 
     // Check connection
     if ($conn->error) {

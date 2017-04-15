@@ -7,9 +7,9 @@
  */
 
 function connect_to_db() {
-    $servername = "localhost";
-    $username = "groupdefault";
-    $password = "z#@S6Rs5hyw.";
+    $servername = "188.226.140.147";
+    $username = "root";
+    $password = "db#2IsAw3s0me";
     $db = "friendster";
 
     // Create connection

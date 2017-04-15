@@ -26,3 +26,5 @@ echo '
 <div class="container-fluid">
 ';
 
+session_start();
+

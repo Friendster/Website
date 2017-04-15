@@ -11,7 +11,7 @@ $loginMsg = "";
 
 if(isset($_POST["submit"])) {
 
-    g_recaptcha($_POST["g-recaptcha-response"]);
+    $googlerecapcha = is_recapcha_valid($_POST["g-recaptcha-response"]);
 
     if (empty($_POST["usr"])) {
         $usrErr = "Required";
@@ -43,7 +43,11 @@ if(isset($_POST["submit"])) {
             $hashed_pw = $row["pass"];
 //            if (password_verify('q', base64_decode('JDJ5JDExJC5mSnlCRkZjQVZIRzMyeUxN'))) {
             if (password_verify($pass, base64_decode($hashed_pw))) {
-                $loginMsg = "SUCCESSFUL LOGIN!";
+                echo  "USR" . $row["user"];
+                $_SESSION["name"] = $row["user"];
+                echo "SESSION" . $_SESSION["name"];
+                header("Location: ../index.php");
+
             } else {
                 echo $pass, "______";
                 $passErr = "Wrong password";
@@ -65,7 +69,7 @@ function sanitize_input($data) {
 }
 
 
-function g_recaptcha($response) {
+function is_recapcha_valid($response) {
     $secret = "6LcpFBoUAAAAALNJMzRqz3XcQHW3XHl_IpC11xeU";
 
     $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -83,11 +87,8 @@ function g_recaptcha($response) {
     $context  = stream_context_create($options);
     $verify = file_get_contents($url, false, $context);
     $captcha_success=json_decode($verify);
-    if ($captcha_success->success==false) {
-        echo "<p>You are a bot! Go away!</p>";
-    } else if ($captcha_success->success==true) {
-        echo "<p>You are not a bot!</p>";
-    }
+
+    return $captcha_success->success;
 }
 ?>
 

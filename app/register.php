@@ -71,7 +71,7 @@ if (isset($_POST['submit']))
     <div class="my-login-box col-md-6 col-lg-4">
         <h1>Register for a magical journey :^)</h1>
 
-        <?php if(!empty($loginMsg)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $loginMsg</div>"; ?>
+        <?php if(!empty($loginMessage)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $loginMessage</div>"; ?>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" autocomplete="off">
             <div class="form-group">

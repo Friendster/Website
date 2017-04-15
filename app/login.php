@@ -2,6 +2,8 @@
 
 include "../include/header.php";
 include "../include/init.php";
+include "googlerecapcha.php";
+
 
 $usr = "";
 $pass = "";
@@ -11,7 +13,7 @@ $loginMsg = "";
 
 if(isset($_POST["submit"])) {
 
-    $googlerecapcha = is_recapcha_valid($_POST["g-recaptcha-response"]);
+    $is_recapcha_valid = is_recapcha_valid($_POST["g-recaptcha-response"]);
 
     if (empty($_POST["usr"])) {
         $usrErr = "Required";
@@ -42,21 +44,15 @@ if(isset($_POST["submit"])) {
 
             $hashed_pw = $row["pass"];
 //            if (password_verify('q', base64_decode('JDJ5JDExJC5mSnlCRkZjQVZIRzMyeUxN'))) {
-            if (password_verify($pass, base64_decode($hashed_pw))) {
+            if (password_verify($pass, base64_decode($hashed_pw)) && $is_recapcha_valid) {
                 echo  "USR" . $row["user"];
                 $_SESSION["name"] = $row["user"];
                 echo "SESSION" . $_SESSION["name"];
                 header("Location: ../index.php");
 
-            } else {
-                echo $pass, "______";
-                $passErr = "Wrong password";
-                $loginMsg = $passErr;
             }
-
         } else {
-            $usrErr = "Inexistent user";
-            $loginMsg = $usrErr;
+            $loginErr = "Something went wrong";
         }
 
         $conn->close();
@@ -68,28 +64,6 @@ function sanitize_input($data) {
     return $data;
 }
 
-
-function is_recapcha_valid($response) {
-    $secret = "6LcpFBoUAAAAALNJMzRqz3XcQHW3XHl_IpC11xeU";
-
-    $url = 'https://www.google.com/recaptcha/api/siteverify';
-    $data = array(
-        'secret' => $secret,
-        'response' => $response
-    );
-    $options = array(
-        'http' => array (
-            'method' => 'POST',
-            'header'=>"Content-Type: application/x-www-form-urlencoded\r\n",
-            'content' => http_build_query($data)
-        )
-    );
-    $context  = stream_context_create($options);
-    $verify = file_get_contents($url, false, $context);
-    $captcha_success=json_decode($verify);
-
-    return $captcha_success->success;
-}
 ?>
 
 <div class="row align-items-center justify-content-center">

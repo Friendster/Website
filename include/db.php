@@ -11,10 +11,9 @@ function connect_to_db() {
     $username = "root";
     $password = "db#2IsAw3s0me";
     $db = "friendster";
-    $port = "3306";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $db, $port);
+    $conn = new mysqli($servername, $username, $password, $db);
 
     // Check connection
     if ($conn->error) {

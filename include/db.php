@@ -5,6 +5,8 @@
  * Date: 2/4/2017
  * Time: 19:15
  */
+//
+//include "model/user.php";
 
 function connect_to_db() {
     $servername = "127.0.0.1";
@@ -24,17 +26,17 @@ function connect_to_db() {
 
 // http://php.net/manual/en/mysqli-stmt.get-result.php
 // http://php.net/manual/en/mysqli.prepare.php - see also solution for results to arrays here
-function db_get_pass($user) {
-    $passDB = '';
+function db_get_user($user) {
+    $userObj = new stdClass();
 
     // Connect to db
     $conn = connect_to_db();
 
     // Define sql
-    $sql = "SELECT pass FROM user WHERE user=?";
+    $sql = "SELECT pass, id FROM user WHERE user=?";
 
     // Prepare statemet
-    if($stmt = $conn->prepare($sql)) {
+    if ($stmt = $conn->prepare($sql)) {
 
         // Bind user parameter
         $stmt->bind_param('s', $user);
@@ -43,17 +45,50 @@ function db_get_pass($user) {
         $stmt->execute();
 
         // Bind result variables
-        $stmt->bind_result($passDB);
+        $stmt->bind_result($userObj->pass, $userObj->id);
+
+        // Fetch value
+        $stmt->fetch();
+        $stmt->close();
+    }
+
+
+    $conn->close();
+
+    return $userObj;
+}
+
+function db_create_post($user_id, $content) {
+
+    // Connect to db
+    $conn = connect_to_db();
+
+    // Define sql
+    $sql = "INSERT INTO `friendster`.`post` (`user_id`, `content`) VALUES (?,?)";
+
+    // Prepare statemet
+    if ($stmt = $conn->prepare($sql)) {
+
+        // Bind user parameter
+        $stmt->bind_param('is', $user_id, $content);
+
+        echo "USER ID = " . $user_id;
+
+        // Execute query
+        $stmt->execute();
 
         // Fetch value
         $stmt->fetch();
 
+        $stmt->close();
+    } else {
+        echo "ERRO";
+        echo $stmt->errno . " " . $stmt->error;
     }
 
-    $stmt->close();
-    $conn->close();
 
-    return $passDB;
+    $conn->close();
+    
 }
 
 

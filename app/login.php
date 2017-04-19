@@ -24,9 +24,12 @@ if (isset($_POST["submit"])) {
 
     // If user input is ok so far then QUERY db
     if ($is_user_valid && $is_pass_valid && $is_recapcha_valid) {
-        $hashed_pw = db_get_pass($user);
+        $db_user = db_get_user($user);
+
+        $hashed_pw = $db_user->pass;
         if (!empty($hashed_pw) && password_verify($pass, base64_decode($hashed_pw))) {
             $_SESSION["name"] = $user;
+            $_SESSION["user_id"] = $db_user->id;
             header("Location: ../index.php");
         } else {
             $loginError = "Something went wrong";

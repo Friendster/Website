@@ -17,6 +17,7 @@ if (!isset($_SESSION["name"])) {
 
     echo "You are now logged in as: " . $_SESSION["name"];
     echo "<nav><a class=\"btn btn-primary\" href=\"app/logout.php\">Logout</a></nav>";
+    include "app/postpage.php";
 
 }
 

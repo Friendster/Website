@@ -8,9 +8,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo get_style()?>" type="text/css">
-    
-    <!-- Google reCAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js"></script>
 
 </head>
 <body>

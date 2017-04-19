@@ -88,8 +88,7 @@ function validate_pass($value) {
 
                     <div class="<?php echo empty($recapchaError) ? "" : "recapcha-error"; ?>">
                         <?php echo empty($recapchaError) ? "" : "<p class=\"text-danger\">$recapchaError</p>"; ?>
-                        <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"
-                             data-theme="dark"></div>
+                        <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
                     </div>
 
 

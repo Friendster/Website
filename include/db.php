@@ -33,7 +33,7 @@ function db_get_user($user) {
     $conn = connect_to_db();
 
     // Define sql
-    $sql = "SELECT pass, id FROM user WHERE user=?";
+    $sql = "SELECT pass, id FROM user WHERE email=?";
 
     // Prepare statemet
     if ($stmt = $conn->prepare($sql)) {
@@ -59,20 +59,17 @@ function db_get_user($user) {
 }
 
 function db_create_post($user_id, $content) {
-
     // Connect to db
     $conn = connect_to_db();
 
     // Define sql
-    $sql = "INSERT INTO `friendster`.`post` (`user_id`, `content`) VALUES (?,?)";
+    $sql = "INSERT INTO `post` (`user_id`, `content`) VALUES (?,?)";
 
     // Prepare statemet
     if ($stmt = $conn->prepare($sql)) {
 
         // Bind user parameter
         $stmt->bind_param('is', $user_id, $content);
-
-        echo "USER ID = " . $user_id;
 
         // Execute query
         $stmt->execute();
@@ -81,16 +78,29 @@ function db_create_post($user_id, $content) {
         $stmt->fetch();
 
         $stmt->close();
-    } else {
-        echo "ERRO";
-        echo $stmt->errno . " " . $stmt->error;
     }
 
-
     $conn->close();
-    
+
 }
 
+
+function db_get_posts() {
+    // Connect to db
+    $conn = connect_to_db();
+
+    // Define sql
+    $sql = "SELECT `post`.`id` AS `post_id`, `user_id`, `content`, `date`, `email` AS `author` FROM `post`, `user` WHERE `user_id`=`user`.`id`";
+
+    // Get result
+    $result = $conn->query($sql);
+
+    // Close connection
+    $conn->close();
+
+    return $result;
+
+}
 
 //echo password_hash("1234", PASSWORD_BCRYPT, ['cost' => 9])."\n";
 //echo password_verify("1234" , "\$2y$09\$JaMRjTBdfkVpxMqUdMCVcO/0yjWJkMdMRQVacVwKehem4D4dUMdb6")? "true" : "false";

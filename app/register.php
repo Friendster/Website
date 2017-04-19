@@ -41,9 +41,9 @@ if (isset($_POST['submit']))
     }
     echo $hashed_pw . "<br>";
 
-
+    // TODO ADD TO DB AS METHOD
     //creation of variable with the information and db specifics to be injected into db
-    $query = "INSERT INTO user (user, pass) VALUES(?, ?)";
+    $query = "INSERT INTO user (email, pass) VALUES(?, ?)";
 
     $stmt = $conn->stmt_init();
 

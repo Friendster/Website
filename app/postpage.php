@@ -12,7 +12,7 @@ include "include/db.php";
 $user_name = $_SESSION["name"];
 $user_id = $_SESSION["user_id"];
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
     $content = $_POST['content'];
     db_create_post($user_id, $content);
@@ -20,33 +20,44 @@ if(isset($_POST['submit'])) {
 
 ?>
 
-
-<div class="panel panel-default">
-    <div class="panel-heading"><?php echo $user_name ?></div>
-    <div class="panel-body">
-        <form class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
-            <fieldset>
-
+<div class="col-md-offset-3 col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading"><?php echo $user_name ?></div>
+        <div class="panel-body">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
                 <div class="form-group">
-                    <div class="col-lg-10">
-                        <textarea placeholder="Add a new post" name="content" class="form-control" rows="3" id="textArea"></textarea>
-                    </div>
+                    <textarea placeholder="Add a new post" name="content" class="form-control" rows="3"
+                              id="textArea"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button name="submit" type="submit" class="btn btn-primary">Post</button>
-                    </div>
+                    <button name="submit" type="submit" class="btn btn-primary">Post</button>
                 </div>
-            </fieldset>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+
+    <?php
+
+    $posts = db_get_posts();
+    while ($post = $posts->fetch_assoc()) {
+
+//    echo
+//    $post['post_id'] . " " .
+//    $post['user_id'] . " " .
+//    $post['content'] . " " .
+//    $post['author'] . " " .
+//    $post['date'];
 
 
-<div class="panel panel-default">
-    <div class="panel-heading">Author</div>
-    <div class="panel-body">
-        Panel content
-    </div>
+        echo
+            '<div class="panel panel-default">' .
+            '<div class="panel-heading">' . $post['author'] . '</div>' .
+            '<div class="panel-body">' .
+            $post['content'] . '<br />' .
+            $post['date'] .
+            '</div>' .
+            '</div>';
+
+    } ?>
 </div>

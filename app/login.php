@@ -60,43 +60,46 @@ function validate_pass($value) {
 
 ?>
 
-    <div class="my-login-box">
+    <div class="my-login-box panel panel-default">
+        <div class="panel-body">
 
-        <?php if (!empty($loginMessage)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $loginMessage</div>"; ?>
+            <?php if (!empty($loginMessage)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $loginMessage</div>"; ?>
 
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
-            <fieldset>
-                <legend>Enter Wonderland!</legend>
-                <div class="form-group <?php echo !empty($userError) ? "has-error" : ""; ?>">
-                    <label class="control-label" for="usr">Unicorn
-                        name <?php if (!empty($userError)) echo $passError; ?></label>
-                    <input type="text"
-                           class="form-control <?php if (!empty($userError)) echo "form-control-danger"; ?>" id="usr"
-                           name="usr" value="<?php echo "$user"; ?>">
-                </div>
-                <div class="form-group <?php echo !empty($passError) ? "has-error" : ""; ?>">
-                    <label class="control-label" for="pass">Secret Magical
-                        Password <?php if (!empty($passError)) echo $passError; ?></label>
-                    <input type="password"
-                           class="form-control <?php if (!empty($passError)) echo "form-control-danger"; ?>" id="pass"
-                           name="pass" value="<?php echo "$pass"; ?>">
-                </div>
-
-
-                <div class="<?php echo empty($recapchaError) ? "" : "recapcha-error"; ?>">
-                    <?php echo empty($recapchaError) ? "" : "<p class=\"text-danger\">$recapchaError</p>"; ?>
-                    <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"
-                         data-theme="dark"></div>
-                </div>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
+<!--                <fieldset>-->
+                    <legend>Enter Wonderland!</legend>
+                    <div class="form-group <?php echo !empty($userError) ? "has-error" : ""; ?>">
+                        <label class="control-label" for="usr">Unicorn
+                            name <?php if (!empty($userError)) echo $passError; ?></label>
+                        <input type="text"
+                               class="form-control <?php if (!empty($userError)) echo "form-control-danger"; ?>"
+                               id="usr"
+                               name="usr" value="<?php echo "$user"; ?>">
+                    </div>
+                    <div class="form-group <?php echo !empty($passError) ? "has-error" : ""; ?>">
+                        <label class="control-label" for="pass">Secret Magical
+                            Password <?php if (!empty($passError)) echo $passError; ?></label>
+                        <input type="password"
+                               class="form-control <?php if (!empty($passError)) echo "form-control-danger"; ?>"
+                               id="pass"
+                               name="pass" value="<?php echo "$pass"; ?>">
+                    </div>
 
 
-                <div class="form-buttons">
-                    <button type="submit" name="submit" class="btn btn-primary">Login</button>
-                    <a class="btn btn-default" href="register.php">Register?</a>
-                </div>
-                <fieldset>
-        </form>
+                    <div class="<?php echo empty($recapchaError) ? "" : "recapcha-error"; ?>">
+                        <?php echo empty($recapchaError) ? "" : "<p class=\"text-danger\">$recapchaError</p>"; ?>
+                        <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"
+                             data-theme="dark"></div>
+                    </div>
 
+
+                    <div class="form-buttons">
+                        <button type="submit" name="submit" class="btn btn-primary">Login</button>
+                        <a class="btn btn-default" href="register.php">Register?</a>
+                    </div>
+<!--                    <fieldset>-->
+            </form>
+        </div>
     </div>
 
 

@@ -2,7 +2,7 @@
 
 include "../include/header.php";
 include "../include/init.php";
-include "googlerecapcha.php";
+include "googlerecaptcha.php";
 
 
 $user = '';
@@ -10,7 +10,7 @@ $pass = '';
 $userError = '';
 $passError = '';
 $recapchaError = '';
-$loginMessage = '';
+$login_message = '';
 
 if (isset($_POST["submit"])) {
 
@@ -62,8 +62,7 @@ function validate_pass($value) {
 
     <div class="my-login-box panel panel-default">
         <div class="panel-body">
-
-            <?php if (!empty($loginMessage)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $loginMessage</div>"; ?>
+            <?php if (!empty($login_message)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $login_message</div>"; ?>
 
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
 <!--                <fieldset>-->

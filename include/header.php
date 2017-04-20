@@ -20,7 +20,7 @@ function get_style() {
 	$ssl="";
     $customPath = ($_SERVER['SERVER_NAME'] == 'localhost')? ':8081/Friendster': '';
     if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') 
-    	$ssl="s";	.
+    	$ssl="s";
 
     $link = 'http'.$ssl.'://' . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
     return $link;

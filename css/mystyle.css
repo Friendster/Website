@@ -3,12 +3,12 @@ body {
   background-size: cover;
 }
 .my-login-box {
-  width: 385px;
+  width: 413px;
   margin: 3em auto;
   padding: 3em 2.5em;
 }
 .recapcha-error {
-  border: 1px solid #e51c23;
+  border-bottom: 2px solid #e51c23;
   padding: 0.6em;
 }
 .form-buttons {

@@ -17,7 +17,7 @@
 session_start();
 
 function get_style() {
-    $customPath = ($_SERVER['SERVER_NAME'] == 'localhost')? ':8081/Friendster': '';
+    $customPath = ($_SERVER['SERVER_NAME'] == 'localhost')? '/Friendster': '';
     $link = 'http://' . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
     return $link;
 }

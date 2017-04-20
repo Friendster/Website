@@ -184,9 +184,11 @@ function process_verify_password($value) {
                 <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
             </div>
 
+            <div class="form-buttons">
+                <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                <a class="btn btn-default" href="login.php">Login</a>
+            </div>
 
-            <button type="submit" name="submit" class="btn btn-primary">Register</button>
-            <a class="btn btn-default" href="login.php">Login</a>
         </form>
 
     </div>

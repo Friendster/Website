@@ -156,7 +156,6 @@ function process_verify_password($value) {
     <div class="panel-body">
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
-
             <legend>Register for Friendster!</legend>
 
             <div class="form-group <?php echo !empty($email_error) ? "has-error" : ""; ?>">
@@ -184,6 +183,7 @@ function process_verify_password($value) {
                 <?php echo empty($recapcha_error) ? "" : "<p class=\"text-danger\">$recapcha_error</p>"; ?>
                 <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
             </div>
+
 
             <button type="submit" name="submit" class="btn btn-primary">Register</button>
             <a class="btn btn-default" href="login.php">Login</a>

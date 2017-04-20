@@ -10,7 +10,9 @@ $pass = '';
 $userError = '';
 $passError = '';
 $recapchaError = '';
-$login_message = '';
+
+$loginError = '';
+
 
 if (isset($_POST["submit"])) {
 
@@ -32,7 +34,7 @@ if (isset($_POST["submit"])) {
             $_SESSION["user_id"] = $db_user->id;
             header("Location: ../index.php");
         } else {
-            $loginError = "Something went wrong";
+            $loginError = "Username or password is wrong";
         }
     }
 
@@ -62,7 +64,10 @@ function validate_pass($value) {
 
     <div class="my-login-box panel panel-default">
         <div class="panel-body">
-            <?php if (!empty($login_message)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $login_message</div>"; ?>
+
+
+            <?php if (!empty($loginError)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $loginError</div>"; ?>
+
 
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
 <!--                <fieldset>-->

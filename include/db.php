@@ -9,6 +9,8 @@
 $configs = include('config.php');
 
 function connect_to_db() {
+    global $configs;
+
     $host = $configs -> host ;
     $username =  $configs -> username;
     $password =  $configs -> password;

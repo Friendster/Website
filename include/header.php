@@ -16,17 +16,15 @@
     <?php
     session_start();
 
-    function get_style() {
+    function get_style()
+    {
+        $configs = include('config.php');
 
-        $ssl = "";
-        $customPath = ($_SERVER['SERVER_NAME'] == 'localhost') ? '/Friendster' : '';
-        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
-            $ssl = "s";
-
-        $link = 'http' . $ssl . '://' . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
+        $customPath = ($_SERVER['SERVER_NAME'] == $configs->host) ? $configs->path : '';
+        $link = $protocol . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
 
         return $link;
-
     }
 
     ?>

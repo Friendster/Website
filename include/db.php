@@ -5,17 +5,17 @@
  * Date: 2/4/2017
  * Time: 19:15
  */
-//
-//include "model/user.php";
+
+$configs = include('config.php');
 
 function connect_to_db() {
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "db#2IsAw3s0me";
-    $db = "friendster";
+    $host = $configs -> host ;
+    $username =  $configs -> username;
+    $password =  $configs -> password;
+    $db =  $configs -> db;
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $db);
+    $conn = new mysqli($host, $username, $password, $db);
 
     // Check connection
     if ($conn->error) {

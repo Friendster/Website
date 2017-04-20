@@ -1,3 +1,4 @@
 # IDE
 .idea
 .idea_modules/
+config.php

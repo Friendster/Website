@@ -17,9 +17,14 @@
 session_start();
 
 function get_style() {
+	$ssl="";
     $customPath = ($_SERVER['SERVER_NAME'] == 'localhost')? ':8081/Friendster': '';
-    $link = 'http://' . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') 
+    	$ssl="s";	.
+
+    $link = 'http'.$ssl.'://' . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
     return $link;
+
 }
 ?>
 

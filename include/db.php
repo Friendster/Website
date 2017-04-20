@@ -6,15 +6,16 @@
  * Time: 19:15
  */
 
-$configs = include('config.php');
+$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
+$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
 
 function connect_to_db() {
     global $configs;
 
-    $host = $configs -> host ;
+    $host = $configs -> database_host ;
     $username =  $configs -> username;
     $password =  $configs -> password;
-    $db =  $configs -> db;
+    $db =  $configs -> database;
 
     // Create connection
     $conn = new mysqli($host, $username, $password, $db);

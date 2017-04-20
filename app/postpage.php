@@ -14,7 +14,7 @@ $user_id = $_SESSION["user_id"];
 
 if (isset($_POST['submit'])) {
 
-    $content = $_POST['content'];
+    $content = htmlentities($_POST['content']);
     db_create_post($user_id, $content);
 }
 

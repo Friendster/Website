@@ -7,20 +7,28 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo get_style()?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo get_style() ?>" type="text/css">
 
 </head>
 <body>
 <div class="container-fluid">
 
-<?php
-session_start();
+    <?php
+    session_start();
 
-function get_style() {
-    $customPath = ($_SERVER['SERVER_NAME'] == 'localhost')? '/Friendster': '';
-    $link = 'http://' . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
-    return $link;
-}
-?>
+    function get_style() {
+
+        $ssl = "";
+        $customPath = ($_SERVER['SERVER_NAME'] == 'localhost') ? '/Friendster' : '';
+        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
+            $ssl = "s";
+
+        $link = 'http' . $ssl . '://' . $_SERVER['SERVER_NAME'] . $customPath . '/css/mystyle.css';
+
+        return $link;
+
+    }
+
+    ?>
 
 

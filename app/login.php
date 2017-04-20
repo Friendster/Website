@@ -65,12 +65,11 @@ function validate_pass($value) {
     <div class="my-login-box panel panel-default">
         <div class="panel-body">
 
-
-            <?php if (!empty($login_error)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $login_error</div>"; ?>
-
-
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
                 <legend>Enter Wonderland!</legend>
+
+                <?php if (!empty($login_error)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $login_error</div>"; ?>
+
                 <div class="form-group <?php echo !empty($email_error) ? "has-error" : ""; ?>">
                     <label class="control-label" for="usr">Unicorn
                         name <?php if (!empty($email_error)) echo $password_error; ?></label>
@@ -93,7 +92,6 @@ function validate_pass($value) {
                     <?php echo empty($recaptcha_error) ? "" : "<p class=\"text-danger\">$recaptcha_error</p>"; ?>
                     <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
                 </div>
-
 
                 <div class="form-buttons">
                     <button type="submit" name="submit" class="btn btn-primary">Login</button>

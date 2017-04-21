@@ -7,6 +7,7 @@
 include "../include/header.php";
 include "../include/init.php";
 include "googlerecaptcha.php";
+include "login.php";
 
 
 $email = '';
@@ -32,7 +33,11 @@ if (isset($_POST['submit'])) {
         ];
         $hashed_pw = base64_encode(password_hash($password, PASSWORD_BCRYPT, $options));
         db_create_user($email, $hashed_pw);
-        //TODO: Create a success message and redirect user
+        $id = db_get_user($email)->id;
+        if (!empty($id))
+            login($email, $id);
+        else
+            header("Location: ../index.php");
     }
 }
 
@@ -137,7 +142,7 @@ function verify_passwords($password)
 
             <div class="form-buttons">
                 <button type="submit" name="submit" class="btn btn-primary">Register</button>
-                <a class="btn btn-default" href="login.php">Login</a>
+                <a class="btn btn-default" href="login_page.php">Login</a>
             </div>
 
         </form>

@@ -14,7 +14,7 @@ $user_id = $_SESSION["user_id"];
 
 if (isset($_POST['submit'])) {
 
-    $content = htmlentities($_POST['content']);
+    $content = $_POST['content'];
     db_create_post($user_id, $content);
 }
 
@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
             '<div class="panel panel-default">' .
             '<div class="panel-heading">' . $post['author'] . '</div>' .
             '<div class="panel-body">' .
-            htmlentities($post['content']) . '<br />' .
+            htmlspecialchars($post['content']) . '<br />' .
             $post['date'] .
             '</div>' .
             '</div>';

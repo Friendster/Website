@@ -25,6 +25,6 @@ function is_recapcha_valid($response) {
     $verify = file_get_contents($url, false, $context);
     $captcha_success = json_decode($verify);
 
-    return $captcha_success->success;
+    return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? $captcha_success->success : true;
 //    return true;
 }

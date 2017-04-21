@@ -51,7 +51,7 @@ function process_email($value)
         $email_error = "is NOT valid!";
     } // Check if user exists
     elseif (!empty($user = db_get_user($email)->id)) {
-        $email_error = "email has been registered";
+        $email_error = "has been registered";
     }
 
     // Is valid if there is no error

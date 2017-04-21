@@ -15,7 +15,7 @@ if (!isset($_SESSION["name"])) {
         "<a class=\"btn btn-secondary\" href=\"app/register.php\">Register</a></nav>";
 } else {
 
-    echo "You are now logged in as: " . $_SESSION["name"];
+    echo "You are now logged in as: " . htmlentities($_SESSION["name"]);
     echo "<nav><a class=\"btn btn-primary\" href=\"app/logout.php\">Logout</a></nav>";
     include "app/postpage.php";
 

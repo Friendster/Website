@@ -27,6 +27,30 @@ function connect_to_db() {
     return $conn;
 }
 
+function db_create_user( $email, $hashed_pw)
+{
+    $conn = connect_to_db();
+    $query = "INSERT INTO user (email, pass) VALUES(?, ?)";
+
+    $stmt = $conn->stmt_init();
+
+
+    if (!$stmt->prepare($query)) {
+        print "Failed to prepare statement\n";
+    } else {
+
+        $stmt->bind_param('ss', $email, $hashed_pw);
+
+        //execution on the information injection into the db
+        $stmt->execute();
+
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+
 // http://php.net/manual/en/mysqli-stmt.get-result.php
 // http://php.net/manual/en/mysqli.prepare.php - see also solution for results to arrays here
 function db_get_user($user) {

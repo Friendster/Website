@@ -40,7 +40,8 @@ if (isset($_POST["submit"])) {
 
 }
 
-function validate_user($value) {
+function validate_user($value)
+{
     global $email_error, $email;
     $email = htmlspecialchars($value);
 
@@ -50,7 +51,8 @@ function validate_user($value) {
     return $isValid;
 }
 
-function validate_pass($value) {
+function validate_pass($value)
+{
     global $password_error, $password;
     $password = htmlspecialchars($value);
 
@@ -71,8 +73,8 @@ function validate_pass($value) {
                 <?php if (!empty($login_error)) echo "<div class=\"alert alert-danger\" role=\"alert\"><strong>Oh snap!</strong> $login_error</div>"; ?>
 
                 <div class="form-group <?php echo !empty($email_error) ? "has-error" : ""; ?>">
-                    <label class="control-label" for="usr">Unicorn
-                        name <?php if (!empty($email_error)) echo $password_error; ?></label>
+                    <label class="control-label" for="usr">Unicorn email
+                        <?php if (!empty($email_error)) echo $password_error; ?></label>
                     <input type="text"
                            class="form-control <?php if (!empty($email_error)) echo "form-control-danger"; ?>"
                            id="usr"

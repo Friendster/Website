@@ -8,7 +8,6 @@ body {
   padding: 3em 2.5em;
 }
 .recapcha-error {
-  border-bottom: 2px solid #e51c23;
   padding: 0.6em;
 }
 .form-buttons {

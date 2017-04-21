@@ -28,7 +28,7 @@ if (isset($_POST["submit"])) {
     if ($is_user_valid && $is_pass_valid && $is_recaptcha_valid) {
         $db_user = db_get_user($email);
 
-        $hashed_pw = $db_user->pass;
+        $hashed_pw = $db_user->password;
         if (!empty($hashed_pw) && password_verify($password, base64_decode($hashed_pw))) {
             $_SESSION["name"] = $email;
             $_SESSION["user_id"] = $db_user->id;

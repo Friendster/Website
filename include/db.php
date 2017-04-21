@@ -72,7 +72,7 @@ function db_get_user($user) {
         $stmt->execute();
 
         // Bind result variables
-        $stmt->bind_result($userObj->pass, $userObj->id);
+        $stmt->bind_result($userObj->password, $userObj->id);
 
         // Fetch value
         $stmt->fetch();

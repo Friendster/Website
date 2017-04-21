@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
         ];
         $hashed_pw = base64_encode(password_hash($password, PASSWORD_BCRYPT, $options));
         db_create_user($email, $hashed_pw);
-        //TODO: Create a success message
+        //TODO: Create a success message and redirect user
     }
 }
 
@@ -46,14 +46,13 @@ function process_email($value)
 
     if (empty($email)) {
         $email_error = "is required";
-    }
-
-    // Checks to see if user input is a valid email address
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } // Checks to see if user input is a valid email address
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $email_error = "is NOT valid!";
+    } // Check if user exists
+    elseif (!empty($user = db_get_user($email)->id)) {
+        $email_error = "email has been registered";
     }
-
-    // TODO check with db wheter is already registered
 
     // Is valid if there is no error
     return empty($email_error);

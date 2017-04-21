@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
 
 <div class="col-md-offset-3 col-md-6">
     <div class="panel panel-default">
-        <div class="panel-heading"><?php echo $user_name ?></div>
+        <div class="panel-heading"><?php echo htmlspecialchars($user_name) ?></div>
         <div class="panel-body">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
                 <div class="form-group">
@@ -52,10 +52,10 @@ if (isset($_POST['submit'])) {
 
         echo
             '<div class="panel panel-default">' .
-            '<div class="panel-heading">' . $post['author'] . '</div>' .
+            '<div class="panel-heading">' . htmlspecialchars($post['author']) . '</div>' .
             '<div class="panel-body">' .
             htmlspecialchars($post['content']) . '<br />' .
-            $post['date'] .
+            htmlspecialchars($post['date']) .
             '</div>' .
             '</div>';
 

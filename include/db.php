@@ -29,6 +29,7 @@ function connect_to_db() {
 
 function db_create_user( $email, $hashed_pw)
 {
+    //todo: error check if db is unavailable
     $conn = connect_to_db();
     $query = "INSERT INTO user (email, pass) VALUES(?, ?)";
 

@@ -34,6 +34,10 @@ body {
     bottom: -100px;
   }
 }
+.profile img {
+  max-height: 170px;
+  max-width: 170px;
+}
 .nopadding {
   padding: 0;
 }

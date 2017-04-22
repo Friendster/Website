@@ -1,4 +1,6 @@
 @import "variables";
+@import "elements";
+
 
 body {
   background: @bg url("../img/bg.jpg") no-repeat fixed center;
@@ -44,7 +46,14 @@ body {
   @media screen and (min-width: 993px) {
     bottom: -(@profile-size / 2);
   }
+
+  img {
+    max-height: @profile-size - 30px;
+    max-width: @profile-size - 30px;
+  }
 }
+
+
 
 .nopadding {
   padding: 0;

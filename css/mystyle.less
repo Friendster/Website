@@ -24,3 +24,32 @@ body {
     margin-right: 1em;
   }
 }
+
+@profile-size: 200px;
+
+.cover {
+  background-color: fade(black, 10%);
+  color: black;
+  height: @profile-size * 1.25;
+  margin: 0 0 4rem;
+}
+
+.profile {
+  width: @profile-size;
+  height: @profile-size;
+  margin: 20px auto;
+  position: relative;
+  bottom: 0;
+
+  @media screen and (min-width: 993px) {
+    bottom: -(@profile-size / 2);
+  }
+}
+
+.nopadding {
+  padding: 0;
+}
+
+.nomargin {
+  margin: 0;
+}

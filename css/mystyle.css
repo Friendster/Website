@@ -16,3 +16,27 @@ body {
 .form-buttons * {
   margin-right: 1em;
 }
+.cover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: black;
+  height: 250px;
+  margin: 0 0 4rem;
+}
+.profile {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  position: relative;
+  bottom: 0;
+}
+@media screen and (min-width: 993px) {
+  .profile {
+    bottom: -100px;
+  }
+}
+.nopadding {
+  padding: 0;
+}
+.nomargin {
+  margin: 0;
+}

@@ -19,28 +19,29 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
+<div class="container-fluid">
 
-<div class="col-md-offset-3 col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading"><?php echo htmlspecialchars($user_name) ?></div>
-        <div class="panel-body">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
-                <div class="form-group">
+    <div class="col-md-offset-3 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><?php echo htmlspecialchars($user_name) ?></div>
+            <div class="panel-body">
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
+                    <div class="form-group">
                     <textarea placeholder="Add a new post" name="content" class="form-control" rows="3"
                               id="textArea"></textarea>
-                </div>
+                    </div>
 
-                <div class="form-group">
-                    <button name="submit" type="submit" class="btn btn-primary">Post</button>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <button name="submit" type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <?php
+        <?php
 
-    $posts = db_get_posts();
-    while ($post = $posts->fetch_assoc()) {
+        $posts = db_get_posts();
+        while ($post = $posts->fetch_assoc()) {
 
 //    echo
 //    $post['post_id'] . " " .
@@ -50,14 +51,15 @@ if (isset($_POST['submit'])) {
 //    $post['date'];
 
 
-        echo
-            '<div class="panel panel-default">' .
-            '<div class="panel-heading">' . htmlspecialchars($post['author']) . '</div>' .
-            '<div class="panel-body">' .
-            htmlspecialchars($post['content']) . '<br />' .
-            htmlspecialchars($post['date']) .
-            '</div>' .
-            '</div>';
+            echo
+                '<div class="panel panel-default">' .
+                '<div class="panel-heading">' . htmlspecialchars($post['author']) . '</div>' .
+                '<div class="panel-body">' .
+                htmlspecialchars($post['content']) . '<br />' .
+                htmlspecialchars($post['date']) .
+                '</div>' .
+                '</div>';
 
-    } ?>
+        } ?>
+    </div>
 </div>

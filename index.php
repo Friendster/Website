@@ -8,15 +8,38 @@
 
 include "include/header.php";
 
-
 if (!isset($_SESSION["name"])) {
-    //header("Location: app/login_page.php");
-    echo "<a class=\"btn btn-primary\" href=\"app/login_page.php\">Login</a> " .
-        "<a class=\"btn btn-secondary\" href=\"app/register.php\">Register</a></nav>";
+    header("Location: app/login_page.php");
 } else {
 
-    echo "You are now logged in as: " . htmlentities($_SESSION["name"]);
-    echo "<nav><a class=\"btn btn-primary\" href=\"app/logout.php\">Logout</a></nav>";
+    ?>
+    <nav class="navbar navbar-default nomargin">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Friendster</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><?php echo "<p class=\"navbar-text\">Logged in as: " . htmlentities($_SESSION["name"]) ."</p>";?></li>
+                    <li><a href="app/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <?php
+
+
+
+    include "app/profile_header.php";
     include "app/post_page.php";
 
 }

@@ -32,7 +32,7 @@ function get_style() {
 
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid nopadding">
 
 
 

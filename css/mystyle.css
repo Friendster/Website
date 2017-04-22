@@ -40,3 +40,9 @@ body {
 .nomargin {
   margin: 0;
 }
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.modal-dialog {
+  margin-top: 40vh;
+}

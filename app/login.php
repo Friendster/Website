@@ -7,6 +7,6 @@ function login($email, $id){
     // TODO refactor session name -> email
     $_SESSION["name"] = $email;
     $_SESSION["user_id"] = $id;
-    header("Location: ../index.php");
+    header("Location: index.php");
 }
 

@@ -6,16 +6,17 @@
  * Time: 19:15
  */
 
+// TODO UPDATE TO PDO
 $customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
 $configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
 
 function connect_to_db() {
     global $configs;
 
-    $host = $configs -> database_host ;
-    $username =  $configs -> username;
-    $password =  $configs -> password;
-    $db =  $configs -> database;
+    $host = $configs->database_host;
+    $username = $configs->username;
+    $password = $configs->password;
+    $db = $configs->database;
 
     // Create connection
     $conn = new mysqli($host, $username, $password, $db);
@@ -27,8 +28,7 @@ function connect_to_db() {
     return $conn;
 }
 
-function db_create_user( $email, $hashed_pw)
-{
+function db_create_user($email, $hashed_pw) {
     //todo: error check if db is unavailable
     $conn = connect_to_db();
     $query = "INSERT INTO user (email, pass) VALUES(?, ?)";
@@ -130,7 +130,60 @@ function db_get_posts() {
 
 }
 
-//echo password_hash("1234", PASSWORD_BCRYPT, ['cost' => 9])."\n";
-//echo password_verify("1234" , "\$2y$09\$JaMRjTBdfkVpxMqUdMCVcO/0yjWJkMdMRQVacVwKehem4D4dUMdb6")? "true" : "false";
+function db_get_profile($user_id) {
+    $profile_obj = new stdClass();
+    // Connect to db
+    $conn = connect_to_db();
+
+    // Define sql
+    $sql = "SELECT `name`, `description`, `profilePictureName`, `dateOfBirth` FROM `user` WHERE `id`=?";
+
+    // Prepare statemet
+    if ($stmt = $conn->prepare($sql)) {
+
+        // Bind user parameter
+        $stmt->bind_param('s', $user_id);
+
+        // Execute query
+        $stmt->execute();
+
+        // Bind result variables
+        $stmt->bind_result($profile_obj->name, $profile_obj->description, $profile_obj->profile_picture_name, $profile_obj->date_of_birth);
+
+        // Fetch value
+        $stmt->fetch();
+        $stmt->close();
+    }
 
 
+    $conn->close();
+
+    return $profile_obj;
+}
+
+
+function db_update_profile_picture($user_id, $profile_picture_name) {
+    // Connect to db
+    $conn = connect_to_db();
+
+    // Define sql
+    $sql = "UPDATE `user` SET `profilePictureName` = ? WHERE `user`.`id` = ?";
+
+    // Prepare statemet
+    if ($stmt = $conn->prepare($sql)) {
+
+        // Bind user parameter
+        $stmt->bind_param('si', $profile_picture_name, $user_id);
+
+        // Execute query
+        if($stmt->execute()) {
+            echo "DB EXECUTED";
+        } else {
+            echo "DB ERR";
+        }
+
+        $stmt->close();
+    }
+
+    $conn->close();
+}

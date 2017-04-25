@@ -6,7 +6,7 @@
  * Time: 17:50
  */
 
-include "include/db.php";
+//include "include/db.php";
 
 
 $user_name = $_SESSION["name"];

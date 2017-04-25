@@ -7,7 +7,12 @@
  * Time: 11:18
  */
 
-$img = "uploads/" . $_SESSION['name'] . '-profile.png';
+
+include "include/db.php";
+$profile = db_get_profile($_SESSION['user_id']);
+
+$img = $profile->profile_picture_name;
+
 
 ?>
 <div class="container-fluid nopadding cover">
@@ -35,12 +40,14 @@ $img = "uploads/" . $_SESSION['name'] . '-profile.png';
             <div class="modal-body">
                 <p>Select an image from your computer</p>
 
-                <form action='app/profile_upload.php' class='form-horizontal' method='post'
-                      enctype='multipart/form-data'>
+                <form action='app/profile_upload.php'
+                      method='post'
+                      enctype='multipart/form-data'
+                      class='form-horizontal'>
+
                     <div class="form-group">
 
-                        <input type="file" name='fileToUpload' class="form-control" id="fileToUpload"
-                               placeholder="Email"/>
+                        <input type="file" name="profile" class="form-control" id="profile"/>
 
                     </div>
 

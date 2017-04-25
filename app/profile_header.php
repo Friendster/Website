@@ -8,7 +8,7 @@
  */
 
 
-include "include/db.php";
+
 $profile = db_get_profile($_SESSION['user_id']);
 
 $img = $profile->profile_picture_name;

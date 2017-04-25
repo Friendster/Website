@@ -7,16 +7,14 @@
  */
 
 // TODO UPDATE TO PDO
-$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
-$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
 
 function connect_to_db() {
-    global $configs;
+    global $config;
 
-    $host = $configs->database_host;
-    $username = $configs->username;
-    $password = $configs->password;
-    $db = $configs->database;
+    $host = $config->database_host;
+    $username = $config->username;
+    $password = $config->password;
+    $db = $config->database;
 
     // Create connection
     $conn = new mysqli($host, $username, $password, $db);

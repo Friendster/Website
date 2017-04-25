@@ -1,7 +1,5 @@
 <?php
 
-include "../include/header.php";
-include "../include/init.php";
 include "googlerecaptcha.php";
 include "login.php";
 
@@ -103,5 +101,3 @@ function validate_pass($value)
         </div>
     </div>
 
-
-<?php include "../include/footer.php"; ?>

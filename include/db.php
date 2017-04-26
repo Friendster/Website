@@ -8,7 +8,8 @@
 
 // TODO UPDATE TO PDO
 
-function connect_to_db() {
+function connect_to_db()
+{
     global $config;
 
     $host = $config->database_host;
@@ -26,7 +27,8 @@ function connect_to_db() {
     return $conn;
 }
 
-function db_create_user($email, $hashed_pw) {
+function db_create_user($email, $hashed_pw)
+{
     //todo: error check if db is unavailable
     $conn = connect_to_db();
     $query = "INSERT INTO user (email, pass) VALUES(?, ?)";
@@ -52,7 +54,8 @@ function db_create_user($email, $hashed_pw) {
 
 // http://php.net/manual/en/mysqli-stmt.get-result.php
 // http://php.net/manual/en/mysqli.prepare.php - see also solution for results to arrays here
-function db_get_user($user) {
+function db_get_user($user)
+{
     $userObj = new stdClass();
 
     // Connect to db
@@ -84,7 +87,8 @@ function db_get_user($user) {
     return $userObj;
 }
 
-function db_create_post($user_id, $content) {
+function db_create_post($user_id, $content)
+{
     // Connect to db
     $conn = connect_to_db();
 
@@ -111,7 +115,8 @@ function db_create_post($user_id, $content) {
 }
 
 
-function db_get_posts() {
+function db_get_posts()
+{
     // Connect to db
     $conn = connect_to_db();
 
@@ -128,7 +133,46 @@ function db_get_posts() {
 
 }
 
-function db_get_profile($user_id) {
+function db_update_post($post_id, $post_content)
+{
+    $conn = connect_to_db();
+
+    $sql = "UPDATE `friendster`.`post` SET `content`=? WHERE `id`=? ";
+
+    if ($stmt = $conn->prepare($sql)) {
+
+        // Bind user parameter
+        $stmt->bind_param('si', $post_id, $post_content);
+
+        // Execute query
+        $stmt->execute();
+
+
+        // Fetch value
+        $stmt->fetch();
+        $stmt->close();
+    }
+
+    $conn->close();
+}
+
+function db_delete_post($post_id)
+{
+    $conn = connect_to_db();
+
+    $sql = "DELETE FROM post WHERE post_id = {$post_id} ";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->execute();
+
+        $stmt->close();
+    }
+
+    $conn->close();
+}
+
+function db_get_profile($user_id)
+{
     $profile_obj = new stdClass();
     // Connect to db
     $conn = connect_to_db();
@@ -160,7 +204,8 @@ function db_get_profile($user_id) {
 }
 
 
-function db_update_profile_picture($user_id, $profile_picture_name) {
+function db_update_profile_picture($user_id, $profile_picture_name)
+{
     // Connect to db
     $conn = connect_to_db();
 
@@ -174,7 +219,7 @@ function db_update_profile_picture($user_id, $profile_picture_name) {
         $stmt->bind_param('si', $profile_picture_name, $user_id);
 
         // Execute query
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             echo "DB EXECUTED";
         } else {
             echo "DB ERR";

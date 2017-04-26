@@ -17,6 +17,20 @@ if (isset($_POST['submit'])) {
     $content = $_POST['content'];
     db_create_post($user_id, $content);
 }
+//TODO need post id and userid of the post
+if (isset($_POST["delete"])) {
+
+    $post_id = $_GET['delete'];
+    db_delete_post($post_id);
+}
+//TODO: need post content, post id and user id of the person who made the post. HELP?
+if (isset($_POST["edit"])) {
+
+    $post_id = $_GET['edit'];
+
+    db_update_post($post_id);
+}
+
 
 ?>
 <div class="container-fluid">
@@ -42,7 +56,12 @@ if (isset($_POST['submit'])) {
 
         $posts = db_get_posts();
         while ($post = $posts->fetch_assoc()) {
-
+            $delete_button = '<div class="form-group">' .
+                '<button name="delete" type="delete" postid='.$post['post_id'].' class="btn btn">Delete</button>' .
+                '</div>';
+            $edit_button = '<div class="form-group">' .
+                '<button name="edit" type="edit" postid='.$post['post_id'].' class="btn btn">Edit</button>' .
+                '</div>';
 //    echo
 //    $post['post_id'] . " " .
 //    $post['user_id'] . " " .
@@ -58,6 +77,8 @@ if (isset($_POST['submit'])) {
                 htmlspecialchars($post['content']) . '<br />' .
                 htmlspecialchars($post['date']) .
                 '</div>' .
+                ($delete_button) .
+
                 '</div>';
 
         } ?>

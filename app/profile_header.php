@@ -11,8 +11,7 @@
 
 $profile = db_get_profile($_SESSION['user_id']);
 
-//Todo: default empty image is needed
-$img = empty($profile->profile_picture_name) ? "" :$profile->profile_picture_name;
+$img = empty($profile->profile_picture_name) ? "../uploads/defaultImage.png" :$profile->profile_picture_name;
 
 
 ?>

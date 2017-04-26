@@ -62,12 +62,6 @@ if (isset($_POST["edit"])) {
             $edit_button = '<div class="form-group">' .
                 '<button name="edit" type="edit" postid='.$post['post_id'].' class="btn btn">Edit</button>' .
                 '</div>';
-//    echo
-//    $post['post_id'] . " " .
-//    $post['user_id'] . " " .
-//    $post['content'] . " " .
-//    $post['author'] . " " .
-//    $post['date'];
 
 
             echo
@@ -77,7 +71,8 @@ if (isset($_POST["edit"])) {
                 htmlspecialchars($post['content']) . '<br />' .
                 htmlspecialchars($post['date']) .
                 '</div>' .
-                ($delete_button) .
+                ($delete_button)
+                . $edit_button.
 
                 '</div>';
 

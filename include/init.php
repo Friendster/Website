@@ -4,6 +4,12 @@
  */
 
 //include "db.php";
+
+//$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
+//$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
+
+
+
 include "config.php";
 include "db.php";
 session_start();

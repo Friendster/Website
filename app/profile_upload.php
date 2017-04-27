@@ -13,7 +13,7 @@ session_start();
 
 $image_name = $_SESSION["name"] . "-profile";
 $image_file_type = pathinfo(basename($_FILES["profile"]["name"]), PATHINFO_EXTENSION);
-$target_dir = "../uploads/";
+$target_dir = "../../uploads/";
 $target_file = $target_dir . $image_name . "." . $image_file_type;
 
 $upload_ok = 1;
@@ -45,6 +45,7 @@ if ($upload_ok == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
+    echo(getcwd());
     if (move_uploaded_file($_FILES["profile"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["profile"]["name"]). " has been uploaded.";
     } else {

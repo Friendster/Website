@@ -7,6 +7,7 @@
  */
 
 function is_recapcha_valid($response) {
+    global $config;
     $secret = "6LcpFBoUAAAAALNJMzRqz3XcQHW3XHl_IpC11xeU";
 
     $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -25,6 +26,5 @@ function is_recapcha_valid($response) {
     $verify = file_get_contents($url, false, $context);
     $captcha_success = json_decode($verify);
 
-//    return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? $captcha_success->success : true;
-    return true;
+    return ($config->host != "localhost") ? $captcha_success->success : true;
 }

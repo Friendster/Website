@@ -121,7 +121,7 @@ function db_get_posts()
     $conn = connect_to_db();
 
     // Define sql
-    $sql = "SELECT `post`.`id` AS `post_id`, `user_id`, `content`, `date`, `email` AS `author` FROM `post`, `user` WHERE `user_id`=`user`.`id`";
+    $sql = "SELECT `post`.`id` AS `post_id`, `user_id`, `content`, `date`, `email` AS `author` FROM `post`, `user` WHERE `user_id`=`user`.`id` order by date desc";
 
     // Get result
     $result = $conn->query($sql);
@@ -147,9 +147,6 @@ function db_update_post($post_id, $post_content)
         // Execute query
         $stmt->execute();
 
-
-        // Fetch value
-        $stmt->fetch();
         $stmt->close();
     }
 
@@ -160,9 +157,13 @@ function db_delete_post($post_id)
 {
     $conn = connect_to_db();
 
-    $sql = "DELETE FROM post WHERE post_id = {$post_id} ";
+    $sql = "DELETE FROM `friendster`.`post` WHERE `id`=? ";
 
     if ($stmt = $conn->prepare($sql)) {
+
+        // Bind user parameter
+        $stmt->bind_param('i', $post_id);
+
         $stmt->execute();
 
         $stmt->close();

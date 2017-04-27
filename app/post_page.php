@@ -17,16 +17,18 @@ if (isset($_POST['submit'])) {
     $content = $_POST['content'];
     db_create_post($user_id, $content);
 }
-//TODO need post id and userid of the post
+//TODO need post id
 if (isset($_POST["delete"])) {
 
-    $post_id = $_GET['delete'];
-    db_delete_post($post_id);
+    $post_id = $_POST['postid'];
+    echo("<script>alert(\"SOMETHING\")</script>post id from delete".$post_id);
+    //db_delete_post($post_id);
 }
-//TODO: need post content, post id and user id of the person who made the post. HELP?
+
+//TODO: need post content, post id  HELP?
 if (isset($_POST["edit"])) {
 
-    $post_id = $_GET['edit'];
+    $post_id = $_GET['postid'];
 
     db_update_post($post_id);
 }
@@ -44,7 +46,6 @@ if (isset($_POST["edit"])) {
                     <textarea placeholder="Add a new post" name="content" class="form-control" rows="3"
                               id="textArea"></textarea>
                     </div>
-
                     <div class="form-group">
                         <button name="submit" type="submit" class="btn btn-primary">Post</button>
                     </div>
@@ -56,11 +57,17 @@ if (isset($_POST["edit"])) {
 
         $posts = db_get_posts();
         while ($post = $posts->fetch_assoc()) {
-            $delete_button = '<div class="form-group">' .
-                '<button name="delete" type="delete" postid='.$post['post_id'].' class="btn btn">Delete</button>' .
-                '</div>';
-            $edit_button = '<div class="form-group">' .
-                '<button name="edit" type="edit" postid='.$post['post_id'].' class="btn btn">Edit</button>' .
+            $editButtons =
+
+                '<div class="form-buttons">' .
+                '<form method="post" >' .
+                '<button name="delete" type="delete" postid=' . $post['post_id'] . ' class="btn btn-danger">Delete</button>' .
+                '<textarea  name="content" class="form-control" rows="3"
+                              id="textArea"></textarea>' .
+                '</form>' .
+                '<form method="edit" >' .
+                '<button name="edit" type="edit" postid=' . $post['post_id'] . ' class="btn btn-primary">Edit</button>' .
+                '</form>' .
                 '</div>';
 
 
@@ -70,10 +77,8 @@ if (isset($_POST["edit"])) {
                 '<div class="panel-body">' .
                 htmlspecialchars($post['content']) . '<br />' .
                 htmlspecialchars($post['date']) .
+                ($user_name == $post['author'] ? ($editButtons) : "") .
                 '</div>' .
-                ($delete_button)
-                . $edit_button.
-
                 '</div>';
 
         } ?>

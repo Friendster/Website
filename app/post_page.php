@@ -106,7 +106,7 @@ if (isset($_POST["delete"])) {
 
             echo
                 '<div class="panel panel-default">' .
-                '<div class="panel-heading">' . htmlspecialchars($post['author']) . htmlspecialchars($post['post_id']) . '</div>' .
+                '<div class="panel-heading">' . htmlspecialchars($post['author']) . '</div>' .
                 '<div class="panel-body">' .
                 htmlspecialchars($post['content']) . '<br />' .
                 htmlspecialchars($post['date']) .

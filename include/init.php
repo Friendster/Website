@@ -9,8 +9,6 @@
 //$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
 
 
-
-
 session_start();
 //Regenerate session every 5 minutes
 if (!isset($_SESSION['CREATED'])) {
@@ -32,6 +30,15 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 include "config.php";
 include "db.php";
 include "crypt.php";
+
+
+function set_location_to_root()
+{
+    global $config;
+    $root_location = ($config->host != "localhost") ? "/" : "index.php";
+
+    header("Location:" . $root_location);
+}
 
 //$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
 //$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');

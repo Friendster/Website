@@ -42,7 +42,8 @@ if (isset($_POST['submit'])) {
 
     $content = $_POST['content'];
     db_create_post($user_id, $content);
-    header("Location: index.php");
+    set_location_to_root();
+
 }
 
 //TODO need post id
@@ -52,7 +53,8 @@ if (isset($_POST["delete"])) {
     if (is_post_author($user_id, $post_id)) {
         echo("<script>alert(" . $post_id . ")</script>");
         db_delete_post($post_id);
-        header("Location: index.php");
+        set_location_to_root();
+
     }
 }
 

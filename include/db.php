@@ -121,15 +121,21 @@ function db_get_posts()
     $conn = connect_to_db();
 
     // Define sql
-    $sql = "SELECT `post`.`id` AS `post_id`, `user_id`, `content`, `date`, `email` AS `author` FROM `post`, `user` WHERE `user_id`=`user`.`id` order by date desc";
+    $sql = "SELECT `post`.`id` AS `post_id`, `user_id`, `content`, `date`, `email` AS `author` FROM `post`, `user` WHERE `user_id`=`user`.`id` ORDER BY `date` DESC";
+
 
     // Get result
     $result = $conn->query($sql);
 
+
+    $posts = array();
+
+    while($row =  $result->fetch_assoc()) {
+        array_push($posts, $row);
+    }
     // Close connection
     $conn->close();
-
-    return $result;
+    return $posts;
 
 }
 

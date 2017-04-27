@@ -12,6 +12,7 @@
 
 include "config.php";
 include "db.php";
+include "crypt.php";
 session_start();
 //Regenerate session every 5 minutes
 if (!isset($_SESSION['CREATED'])) {

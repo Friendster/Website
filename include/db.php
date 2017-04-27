@@ -226,11 +226,7 @@ function db_update_profile_picture($user_id, $profile_picture_name)
         $stmt->bind_param('si', $profile_picture_name, $user_id);
 
         // Execute query
-        if ($stmt->execute()) {
-            echo "DB EXECUTED";
-        } else {
-            echo "DB ERR";
-        }
+        $stmt->execute();
 
         $stmt->close();
     }

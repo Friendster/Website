@@ -8,11 +8,11 @@
  */
 
 
-
 $profile = db_get_profile($_SESSION['user_id']);
+$img = empty($profile->profile_picture_name) ? "uploads/defaultImage.png" : $profile->profile_picture_name;
 
-$img = empty($profile->profile_picture_name) ? "../uploads/defaultImage.png" :$profile->profile_picture_name;
 
+include "profile_upload.php";
 
 ?>
 <div class="container-fluid nopadding cover">
@@ -21,10 +21,29 @@ $img = empty($profile->profile_picture_name) ? "../uploads/defaultImage.png" :$p
     <div class="col-md-3">
         <div class="panel panel-default profile">
             <div class="panel-body">
-                <a href="#modal" data-toggle="modal"><img src="<?php echo $img;?>" alt=""></a>
+                <a href="#modal" data-toggle="modal"><img src="<?php echo $img; ?>" alt=""></a>
             </div>
         </div>
     </div>
+
+    <?php
+    if (!empty($error_upload)) {
+        echo
+            '<div class="alert alert-dismissible alert-danger">' .
+            '   <button type="button" class="close" data-dismiss="alert">&times;</button>' .
+            '   <strong>Oh snap! </strong>' . htmlentities($error_upload) .
+            '</div>';
+    }
+    if (!empty($message_upload)) {
+        echo
+            '<div class="alert alert-dismissible alert-success">' .
+            '   <button type="button" class="close" data-dismiss="alert">&times;</button>' .
+            '   <strong>Well done! </strong>' . htmlentities($message_upload) .
+            '</div>';
+    }
+
+
+    ?>
 
 </div>
 
@@ -40,7 +59,7 @@ $img = empty($profile->profile_picture_name) ? "../uploads/defaultImage.png" :$p
             <div class="modal-body">
                 <p>Select an image from your computer</p>
 
-                <form action='app/profile_upload.php'
+                <form action='#'
                       method='post'
                       enctype='multipart/form-data'
                       class='form-horizontal'>
@@ -53,7 +72,7 @@ $img = empty($profile->profile_picture_name) ? "../uploads/defaultImage.png" :$p
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" name="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" name="upload_profile" class="btn btn-primary">Save</button>
                     </div>
                 </form>
 

@@ -9,7 +9,7 @@
 
 
 $profile = db_get_profile($_SESSION['user_id']);
-$img = empty($profile->profile_picture_name) ? "uploads/defaultImage.png" : $profile->profile_picture_name;
+$img = empty($profile->profile_picture_name) ? "../uploads/defaultImage.png" : $profile->profile_picture_name;
 
 
 include "profile_upload.php";

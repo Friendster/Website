@@ -17,7 +17,7 @@ if (isset($_POST["upload_profile"])) {
     $image_name = $_SESSION["name"] . "-profile";
     $image_file_type = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
 
-    $target_file = "uploads/" . $image_name . "." . $image_file_type;
+    $target_file = "../uploads/" . $image_name . "." . $image_file_type;
 
     if($is_profile_valid) {
         // If everything is ok, try to upload file

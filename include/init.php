@@ -10,9 +10,7 @@
 
 
 
-include "config.php";
-include "db.php";
-include "crypt.php";
+
 session_start();
 //Regenerate session every 5 minutes
 if (!isset($_SESSION['CREATED'])) {
@@ -29,6 +27,11 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     session_destroy();   // destroy session data in storage
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+
+
+include "config.php";
+include "db.php";
+include "crypt.php";
 
 //$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
 //$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');

@@ -14,7 +14,7 @@ $user_id = $_SESSION["user_id"];
 $posts = db_get_posts();
 
 // Encrypt message
-$iv = generate_iv();
+$iv =  $_SESSION["iv"];
 
 
 function find($post_id)
@@ -42,16 +42,17 @@ if (isset($_POST['submit'])) {
 
     $content = $_POST['content'];
     db_create_post($user_id, $content);
+    header("Location: index.php");
 }
 
 //TODO need post id
 if (isset($_POST["delete"])) {
     $post_id = decrypt($_POST["id"], $iv);
-    echo("<script>alert(" . $post_id . ")</script>");
 
     if (is_post_author($user_id, $post_id)) {
-//        echo("<script>alert(" . $post_id . ")</script>");
-        //db_delete_post($post_id);
+        echo("<script>alert(" . $post_id . ")</script>");
+        db_delete_post($post_id);
+        header("Location: index.php");
     }
 }
 
@@ -61,6 +62,7 @@ if (isset($_POST["delete"])) {
 //    $post_id = $_GET['postid'];
 //
 //    db_update_post($post_id);
+//  header("Location: index.php");
 //}
 
 
@@ -86,14 +88,14 @@ if (isset($_POST["delete"])) {
         <?php
 
 
-        foreach ($posts as $post)  {
+        foreach ($posts as $post) {
 //            $link = urlencode($_SERVER["PHP_SELF"]) . "?deleteid=" . urlencode($post['post_id']);
 //            $link = "?deleteid=" . urlencode($post['post_id']);
             $delete_button = ($user_name == $post['author']) ?
 
 //                '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
                 '<form method="post" action="#">
-                    <input type="hidden" name="id" value="' . encrypt(htmlspecialchars($post['post_id']), $iv) . '" />
+                    <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
                     <div class="form-group">
                         <button name="delete" type="submit" class="btn btn-danger">Delete</button>
                     </div>

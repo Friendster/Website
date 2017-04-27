@@ -4,6 +4,11 @@
 $alg = "AES-256-CBC";
 $key = "ThisIsASecretKey12345678";
 
+//Set static IV
+if (!isset($_SESSION["iv"])) {
+    $_SESSION["iv"] = generate_iv();
+}
+
 function encrypt($message, $iv)
 {
     global $alg, $key;
@@ -23,6 +28,7 @@ function decrypt($encrypted, $iv)
     return $decrypted = openssl_decrypt($decoded, $alg, $key, OPENSSL_RAW_DATA, $iv_decoded);
 }
 
+
 function generate_iv()
 {
     global $alg;
@@ -30,3 +36,4 @@ function generate_iv()
     $iv_len = openssl_cipher_iv_length($alg);
     return base64_encode(openssl_random_pseudo_bytes($iv_len));
 }
+

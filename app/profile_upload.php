@@ -14,18 +14,17 @@ if (isset($_POST["upload_profile"])) {
 
     $is_profile_valid = validate_profile($file);
 
-    $image_name = $_SESSION["name"] . "-profile";
     $image_file_type = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
 
-    $target_file = "../uploads/" . $image_name . "." . $image_file_type;
+    $file_name = $_SESSION["name"] . "-profile" . "." . $image_file_type;
 
     if($is_profile_valid) {
         // If everything is ok, try to upload file
-        if (move_uploaded_file($file["tmp_name"], $target_file)) {
+        if (upload($file["tmp_name"], $file_name)) {
             $message_upload .= "The file " . basename($file["name"]) . " has been uploaded. ";
 
             // If upload was successful, update the db
-            db_update_profile_picture($_SESSION["user_id"], $target_file);
+            db_update_profile_picture($_SESSION["user_id"], $file_name);
         } else {
             $error_upload .=  "Sorry, there was an error uploading your file.";
             $is_profile_valid = false;

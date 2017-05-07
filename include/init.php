@@ -30,6 +30,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 include "config.php";
 include "db.php";
 include "crypt.php";
+include "app/image_upload.php";
 
 
 function set_location_to_root()

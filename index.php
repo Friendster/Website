@@ -17,7 +17,7 @@ if (!isset($_SESSION["name"])) {
 }
 
 include "include/footer.php";
-?>
+
 
 
 

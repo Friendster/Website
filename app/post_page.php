@@ -14,7 +14,7 @@ $user_id = $_SESSION["user_id"];
 $posts = db_get_posts();
 
 // Encrypt message
-$iv =  $_SESSION["iv"];
+$iv = $_SESSION["iv"];
 
 
 function find($post_id)
@@ -51,7 +51,6 @@ if (isset($_POST["delete"])) {
     $post_id = decrypt($_POST["id"], $iv);
 
     if (is_post_author($user_id, $post_id)) {
-        echo("<script>alert(" . $post_id . ")</script>");
         db_delete_post($post_id);
         set_location_to_root();
 
@@ -61,10 +60,19 @@ if (isset($_POST["delete"])) {
 //TODO: need post content, post id  HELP?
 if (isset($_POST["edit"])) {
 
-    $post_id = $_GET['postid'];
+    $post_id = decrypt($_POST["id"], $iv);
+    $content = $_POST["edit-content"];
+    echo($content );
+    echo "<script>alert(" . $post_id . $content. ");</script>";
+    if (is_post_author($user_id, $post_id)) {
+        echo("<script>alert(" . $post_id . $content. ");</script>");
+        echo($post_id );
 
-    db_update_post($post_id);
-  header("Location: index.php");
+       //set_location_to_root();
+
+    }
+
+    //db_update_post($post_id, $content);
 }
 
 
@@ -100,14 +108,39 @@ if (isset($_POST["edit"])) {
                 </form>' : "";
 
             $edit_button = ($user_name == $post['author']) ?
+                '<a href="#edit-modal" data-toggle="modal">' .
+                '<button name="edit" class="btn btn-primary">Edit</button>' .
+                '</a>' : "";
+            $edit_post = ($user_name == $post['author']) ?
+                '<div id="edit-modal" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Edit Post</h4>
+                            </div>                 
+                            <div class="modal-body">            
+                                <form action="#"
+                                      method="post"
+                                      enctype="multipart/form-data"
+                                      class="form-vertical">
 
-                '<form method="post" action="#">
-                    <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
-                    <div class="form-group">
-                        <button name="edit" type="submit" class="btn btn-primary">Edit</button>
+                                    <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
+                                    <div class="form-group">
+                                        <textarea name="edit-content" class="form-control" rows="3" id="edit-text-area">'.$post['content'].'</textarea>
+                                    </div>
+                
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" name="edit" class="btn btn-primary">Save</button>
+                                    </div>                                    
+                                </form>                
+                            </div>
+                
+                
+                        </div>
                     </div>
-                </form>' : "";
-
+                </div>' : "";
 
             echo
                 '<div class="panel panel-default">' .
@@ -115,7 +148,7 @@ if (isset($_POST["edit"])) {
                 '<div class="panel-body">' .
                 htmlspecialchars($post['content']) . '<br />' .
                 htmlspecialchars($post['date']) .
-                $delete_button .
+                $delete_button . $edit_button . $edit_post .
                 '</div>' .
                 '</div>';
 

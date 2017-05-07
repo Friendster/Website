@@ -63,9 +63,9 @@ if (isset($_POST["edit"])) {
     $post_id = decrypt($_POST["id"], $iv);
     $content = $_POST["edit-content"];
     echo($content );
-    echo "<script>alert(" . $post_id . $content. ");</script>";
+    echo "<script>alert('" . $post_id . $content. "');</script>";
     if (is_post_author($user_id, $post_id)) {
-        echo("<script>alert(" . $post_id . $content. ");</script>");
+        echo("<script>alert('" . $post_id . $content. "');</script>");
         echo($post_id );
 
        //set_location_to_root();

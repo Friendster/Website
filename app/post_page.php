@@ -58,14 +58,14 @@ if (isset($_POST["delete"])) {
     }
 }
 
-////TODO: need post content, post id  HELP?
-//if (isset($_POST["edit"])) {
-//
-//    $post_id = $_GET['postid'];
-//
-//    db_update_post($post_id);
-//  header("Location: index.php");
-//}
+//TODO: need post content, post id  HELP?
+if (isset($_POST["edit"])) {
+
+    $post_id = $_GET['postid'];
+
+    db_update_post($post_id);
+  header("Location: index.php");
+}
 
 
 ?>
@@ -91,15 +91,20 @@ if (isset($_POST["delete"])) {
 
 
         foreach ($posts as $post) {
-//            $link = urlencode($_SERVER["PHP_SELF"]) . "?deleteid=" . urlencode($post['post_id']);
-//            $link = "?deleteid=" . urlencode($post['post_id']);
             $delete_button = ($user_name == $post['author']) ?
-
-//                '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
                 '<form method="post" action="#">
                     <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
                     <div class="form-group">
                         <button name="delete" type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>' : "";
+
+            $edit_button = ($user_name == $post['author']) ?
+
+                '<form method="post" action="#">
+                    <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
+                    <div class="form-group">
+                        <button name="edit" type="submit" class="btn btn-primary">Edit</button>
                     </div>
                 </form>' : "";
 

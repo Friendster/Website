@@ -17,8 +17,7 @@ $posts = db_get_posts();
 $iv = $_SESSION["iv"];
 
 
-function find($post_id)
-{
+function find($post_id) {
     global $posts;
     foreach ($posts as $post) {
         if ($post['post_id'] == $post_id) {
@@ -28,8 +27,7 @@ function find($post_id)
     return null;
 }
 
-function is_post_author($user_id, $post_id)
-{
+function is_post_author($user_id, $post_id) {
     $post = find($post_id);
     if ($post && $user_id == $post['user_id']) {
         return true;
@@ -62,17 +60,10 @@ if (isset($_POST["edit"])) {
 
     $post_id = decrypt($_POST["id"], $iv);
     $content = $_POST["edit-content"];
-    echo($content );
-    echo "<script>alert('" . $post_id . $content. "');</script>";
     if (is_post_author($user_id, $post_id)) {
-        echo("<script>alert('" . $post_id . $content. "');</script>");
-        echo($post_id );
-
-       //set_location_to_root();
-
+        db_update_post($post_id, $content);
+        set_location_to_root();
     }
-
-    //db_update_post($post_id, $content);
 }
 
 
@@ -100,17 +91,22 @@ if (isset($_POST["edit"])) {
 
         foreach ($posts as $post) {
             $delete_button = ($user_name == $post['author']) ?
-                '<form method="post" action="#">
+                '<form method="post" action="#" class="pull-right">
                     <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
-                    <div class="form-group">
-                        <button name="delete" type="submit" class="btn btn-danger">Delete</button>
-                    </div>
+
+                    <button name="delete" type="submit" class="btn btn-danger btn-xs">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+      
                 </form>' : "";
 
             $edit_button = ($user_name == $post['author']) ?
                 '<a href="#edit-modal" data-toggle="modal">' .
-                '<button name="edit" class="btn btn-primary">Edit</button>' .
+                '<button name="edit" class="btn btn-primary pull-right btn-xs">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button>' .
                 '</a>' : "";
+
             $edit_post = ($user_name == $post['author']) ?
                 '<div id="edit-modal" class="modal">
                     <div class="modal-dialog">
@@ -127,7 +123,7 @@ if (isset($_POST["edit"])) {
 
                                     <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
                                     <div class="form-group">
-                                        <textarea name="edit-content" class="form-control" rows="3" id="edit-text-area">'.$post['content'].'</textarea>
+                                        <textarea name="edit-content" class="form-control" rows="3" id="edit-text-area">' . $post['content'] . '</textarea>
                                     </div>
                 
                                     <div class="modal-footer">
@@ -143,14 +139,21 @@ if (isset($_POST["edit"])) {
                 </div>' : "";
 
             echo
-                '<div class="panel panel-default">' .
-                '<div class="panel-heading">' . htmlspecialchars($post['author']) . '</div>' .
-                '<div class="panel-body">' .
+                '<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title pull-left">' .
+                htmlspecialchars($post['author']) . ' 
+                        </h3>' .
+                $delete_button . $edit_button .
+                '<div class="clearfix"></div>   
+                    </div>
+                        
+                    <div class="panel-body">' .
                 htmlspecialchars($post['content']) . '<br />' .
                 htmlspecialchars($post['date']) .
-                $delete_button . $edit_button . $edit_post .
-                '</div>' .
-                '</div>';
+                $edit_post .
+                '</div>
+                </div>';
 
         } ?>
     </div>

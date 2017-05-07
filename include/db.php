@@ -148,7 +148,7 @@ function db_update_post($post_id, $post_content)
     if ($stmt = $conn->prepare($sql)) {
 
         // Bind user parameter
-        $stmt->bind_param('si', $post_id, $post_content);
+        $stmt->bind_param('si', $post_content, $post_id);
 
         // Execute query
         $stmt->execute();

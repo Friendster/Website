@@ -9,8 +9,8 @@
 
 
 $profile = db_get_profile($_SESSION['user_id']);
-$img = empty($profile->profile_picture_name) ? "../uploads/defaultImage.png" : $profile->profile_picture_name;
-
+$img = empty($profile->profile_picture_name) ? "defaultImage.png" : $profile->profile_picture_name;
+$img_path = "app/image.php?file=" . $img;
 
 include "profile_upload.php";
 
@@ -21,7 +21,9 @@ include "profile_upload.php";
     <div class="col-md-3">
         <div class="panel panel-default profile">
             <div class="panel-body">
-                <a href="#modal" data-toggle="modal"><img src="<?php echo $img; ?>" alt=""></a>
+                <a href="#modal" data-toggle="modal">
+                    <img src="<?php echo $img_path; ?>" alt="">
+                </a>
             </div>
         </div>
     </div>

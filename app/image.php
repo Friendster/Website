@@ -9,14 +9,20 @@ $file_name = decrypt($_GET["file"], $iv);
 $file_name = sanitize($file_name);
 $target_file = "../../uploads/" . $file_name;
 
-header("Content-type: ".finfo_file($finfo, $target_file));
+header("Content-type: " . finfo_file($finfo, $target_file));
 finfo_close($finfo);
 
-$handle=fopen($target_file, "r");
-while (!feof($handle)) {
-    @$contents.= fread($handle, 8192);
+$handle = fopen($target_file, "r");
+$allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF);
+$detectedType = exif_imagetype($target_file);
+$error = !in_array($detectedType, $allowedTypes);
+if (!$error) {
+    while (!feof($handle)) {
+        @$contents .= fread($handle, 8192);
+    }
+    echo $contents;
 }
-echo $contents;
+
 
 // TODO add comments
 function sanitize($file_name) {
@@ -27,3 +33,6 @@ function sanitize($file_name) {
     $file = mb_ereg_replace("([\.]{2,})", '', $file);
     return $file;
 }
+
+
+

@@ -50,3 +50,6 @@ body {
 .modal-dialog {
   margin-top: 40vh;
 }
+.gap {
+  margin-left: 1em !important;
+}

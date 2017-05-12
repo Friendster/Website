@@ -91,10 +91,10 @@ if (isset($_POST["edit"])) {
 
         foreach ($posts as $post) {
             $delete_button = ($user_name == $post['author']) ?
-                '<form method="post" action="#" class="pull-right">
+                '<form method="post" action="#">
                     <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
 
-                    <button name="delete" type="submit" class="btn btn-danger btn-xs">
+                    <button name="delete" type="submit" class="btn btn-danger pull-right btn-sm gap">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </button>
       
@@ -102,7 +102,7 @@ if (isset($_POST["edit"])) {
 
             $edit_button = ($user_name == $post['author']) ?
                 '<a href="#edit-modal" data-toggle="modal">' .
-                '<button name="edit" class="btn btn-primary pull-right btn-xs">
+                '<button name="edit" class="btn btn-primary pull-right btn-sm">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </button>' .
                 '</a>' : "";
@@ -141,7 +141,7 @@ if (isset($_POST["edit"])) {
             echo
                 '<div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title pull-left">' .
+                        <h3 class="panel-title col-xs-8 pull-left">' .
                 htmlspecialchars($post['author']) . ' 
                         </h3>' .
                 $delete_button . $edit_button .

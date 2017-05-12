@@ -1,13 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mancr
- * Date: 07-May-17
- * Time: 13:35
- */
+
+session_start();
+include "../include/crypt.php";
 
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
-$target_file = "../../uploads/" . $_GET["file"];
+$iv = $_SESSION["iv"];
+$file_name = decrypt($_GET["file"], $iv);
+$target_file = "../../uploads/" . $file_name;
 
 header("Content-type: ".finfo_file($finfo, $target_file));
 finfo_close($finfo);

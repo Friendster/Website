@@ -180,12 +180,15 @@ function db_delete_post($post_id)
 
 function db_get_profile($user_id)
 {
+    // TODO create profile model class
     $profile_obj = new stdClass();
+    $profile_obj->id = $user_id;
+
     // Connect to db
     $conn = connect_to_db();
 
     // Define sql
-    $sql = "SELECT `name`, `description`, `profilePictureName`, `dateOfBirth` FROM `user` WHERE `id`=?";
+    $sql = "SELECT `email`, `name`, `description`, `profilePictureName`, `dateOfBirth` FROM `user` WHERE `id`=?";
 
     // Prepare statemet
     if ($stmt = $conn->prepare($sql)) {
@@ -197,7 +200,7 @@ function db_get_profile($user_id)
         $stmt->execute();
 
         // Bind result variables
-        $stmt->bind_result($profile_obj->name, $profile_obj->description, $profile_obj->profile_picture_name, $profile_obj->date_of_birth);
+        $stmt->bind_result($profile_obj->email, $profile_obj->name, $profile_obj->description, $profile_obj->profile_picture_name, $profile_obj->date_of_birth);
 
         // Fetch value
         $stmt->fetch();

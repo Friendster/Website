@@ -9,9 +9,12 @@
 function upload($file, $file_name) {
     $target_file = "../uploads/" . $file_name;
 
-    // Set 
-    $no_exec_mode = 0644;
-    chmod($target_file, $no_exec_mode);
-
-    return move_uploaded_file($file, $target_file);
+    if (move_uploaded_file($file, $target_file)) {
+        // If we successfully move file, then edit permissions
+        $no_exec_mode = 0644;
+        chmod($target_file, $no_exec_mode);
+        return true;
+    } else {
+        return false;
+    }
 }

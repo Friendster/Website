@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
             login($profile);
         }
         else {
-            // set_location_to_root();
+            set_location_to_root();
         }
 
     }

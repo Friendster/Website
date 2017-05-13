@@ -12,7 +12,7 @@ $profile = db_get_profile($_SESSION['user_id']);
 $img_name = empty($profile->profile_picture_name) ? "oOskDVlsS002iszDIcrWqdckY8aM8k.png" : $profile->profile_picture_name;
 $iv = $_SESSION["iv"];
 $encrypted_img_name = urlencode(encrypt($img_name, $iv));
-$img_path = "app/image.php?file=" . $encrypted_img_name;
+$img_path = "?page=image&file=" . $encrypted_img_name;
 
 include "profile_upload.php";
 

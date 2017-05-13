@@ -1,4 +1,30 @@
-RewriteEngine On 
+# Redirecting server https
+RewriteEngine On
 RewriteCond %{HTTP_HOST} ^188.226.140.147 [NC]
-RewriteCond %{SERVER_PORT} 80 
+RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://188.226.140.147/$1 [R,L]
+
+
+# Redirecting server url to index
+RewriteCond %{REQUEST_URI} !=/index.php
+RewriteCond %{REQUEST_URI} !.*\.png$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.jpg$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.css$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.gif$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.js$ [NC]
+RewriteRule .* /index.php
+
+#<Files *.php>
+#	deny from all
+#</Files>
+<Files "index.php">
+	Order Allow,Deny
+	Allow from all
+</Files>
+
+
+#<Files "regisrer.php">
+#        Order Allow,Deny
+ #       Allow from all
+#</Files>
+

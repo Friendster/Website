@@ -37,11 +37,11 @@ include "profile_upload.php";
             '   <button type="button" class="close" data-dismiss="alert">&times;</button>' .
             '   <strong>Oh snap! </strong>' . htmlentities($error_upload) .
             '</div>';
-    } else if (!empty($message_upload)) {
+    } else if (isset($_GET['success'])) {
         echo
             '<div class="alert alert-dismissible alert-success">' .
             '   <button type="button" class="close" data-dismiss="alert">&times;</button>' .
-            '   <strong>Well done! </strong>' . htmlentities($message_upload) .
+            '   <strong>Well done! </strong>' . htmlentities(urldecode($_GET['success'])) .
             '</div>';
     }
 

@@ -33,10 +33,10 @@ include "crypt.php";
 include "app/image_upload.php";
 
 
-function set_location_to_root()
+function set_location_to_root($query = "")
 {
     global $config;
-    $root_location = ($config->host != "localhost") ? "/" : "index.php";
+    $root_location = ($config->host != "localhost") ? "/" : "index.php". $query;
 
     header("Location:" . $root_location);
 }

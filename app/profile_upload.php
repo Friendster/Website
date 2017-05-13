@@ -20,7 +20,7 @@ if (isset($_POST["upload_profile"])) {
         ? generate_name_from_iv() . $_SESSION["user_id"] . "." . $image_file_type
         : $_SESSION["profile_picture_name"];
 
-    if($is_profile_valid) {
+    if ($is_profile_valid) {
         // If everything is ok, try to upload file
         if (upload($file["tmp_name"], $file_name)) {
             $message_upload .= "The file " . basename($file["name"]) . " has been uploaded. ";
@@ -28,23 +28,23 @@ if (isset($_POST["upload_profile"])) {
             // If upload was successful, update the db
             db_update_profile_picture($_SESSION["user_id"], $file_name);
 
-            set_location_to_root();
+            set_location_to_root("?success=".urlencode($message_upload));
         } else {
-            $error_upload .=  "Sorry, there was an error uploading your file.";
+            $error_upload .= "Sorry, there was an error uploading your file.";
             $is_profile_valid = false;
         }
 
     }
-//    set_location_to_root();
 }
 
-function validate_profile($file) {
+function validate_profile($file)
+{
     global $error_upload, $message_upload;
-    $is_valid = true;
+
 
     $image_file_type = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
 
-    if(empty($file["tmp_name"])) {
+    if (empty($file["tmp_name"])) {
         $error_upload .= "File name cannot be empty. ";
         $is_valid = false;
     } else {
@@ -60,19 +60,14 @@ function validate_profile($file) {
 
     // Check file size
     if ($is_valid && $file["size"] > 500000) {
-        $error_upload .=  "Sorry, your file is too large. ";
+        $error_upload .= "Sorry, your file is too large. ";
         $is_valid = false;
     }
 
     // Allow certain file formats
     if ($is_valid && $image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
-        $error_upload .=  "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
+        $error_upload .= "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
         $is_valid = false;
-    }
-
-    // Check if $uploadOk is set to false by an error
-    if ($is_valid == false) {
-        $error_upload .=  "Sorry, your file was not uploaded. ";
     }
 
     return $is_valid;

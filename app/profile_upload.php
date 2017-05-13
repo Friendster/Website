@@ -43,24 +43,29 @@ function validate_profile($file) {
     $is_valid = true;
 
     $image_file_type = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
-    $image_file_size = getimagesize($file["tmp_name"]);
 
-    // Check if file is an image
-    if ($image_file_size !== false) {
-        $is_valid = true;
-    } else {
-        $error_upload .= "File is not an image. ";
+    if(empty($file["tmp_name"])) {
+        $error_upload .= "File name cannot be empty. ";
         $is_valid = false;
+    } else {
+        // Check if file is an image
+        $image_file_size = getimagesize($file["tmp_name"]);
+        if ($image_file_size !== false) {
+            $is_valid = true;
+        } else {
+            $error_upload .= "File is not an image. ";
+            $is_valid = false;
+        }
     }
 
     // Check file size
-    if ($file["size"] > 500000) {
+    if ($is_valid && $file["size"] > 500000) {
         $error_upload .=  "Sorry, your file is too large. ";
         $is_valid = false;
     }
 
     // Allow certain file formats
-    if ($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
+    if ($is_valid && $image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
         $error_upload .=  "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
         $is_valid = false;
     }

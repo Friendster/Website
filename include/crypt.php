@@ -37,3 +37,10 @@ function generate_iv()
     return base64_encode(openssl_random_pseudo_bytes($iv_len));
 }
 
+function generate_name_from_iv() {
+    global $alg;
+
+    $iv_len = openssl_cipher_iv_length($alg);
+    return bin2hex(openssl_random_pseudo_bytes($iv_len));
+}
+

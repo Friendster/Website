@@ -16,7 +16,9 @@ if (isset($_POST["upload_profile"])) {
 
     $image_file_type = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
 
-    $file_name = $_SESSION["name"] . "-profile" . "." . $image_file_type;
+    $file_name = (empty($_SESSION["profile_picture_name"]))
+        ? generate_name_from_iv() . $_SESSION["name"] . "." . $image_file_type
+        : $_SESSION["profile_picture_name"];
 
     if($is_profile_valid) {
         // If everything is ok, try to upload file
@@ -25,6 +27,8 @@ if (isset($_POST["upload_profile"])) {
 
             // If upload was successful, update the db
             db_update_profile_picture($_SESSION["user_id"], $file_name);
+
+            set_location_to_root();
         } else {
             $error_upload .=  "Sorry, there was an error uploading your file.";
             $is_profile_valid = false;

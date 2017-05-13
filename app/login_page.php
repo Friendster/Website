@@ -94,7 +94,7 @@ function validate_pass($value)
 
                 <div class="form-buttons">
                     <button type="submit" name="submit" class="btn btn-primary">Login</button>
-                    <a class="btn btn-default" href="register.php">Register?</a>
+                    <a class="btn btn-default" href="?page=register">Register?</a>
                 </div>
 
             </form>

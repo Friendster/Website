@@ -29,7 +29,8 @@ if (isset($_POST["submit"])) {
 
         $hashed_pw = $db_user->password;
         if (!empty($hashed_pw) && password_verify($password, base64_decode($hashed_pw))) {
-            login($email,$db_user->id);
+            $profile = db_get_profile($db_user->id);
+            login($profile);
         } else {
             $login_error = "Username or password is wrong";
         }

@@ -32,8 +32,10 @@ if (isset($_POST['submit'])) {
         $hashed_pw = base64_encode(password_hash($password, PASSWORD_BCRYPT, $options));
         db_create_user($email, $hashed_pw);
         $id = db_get_user($email)->id;
-        if (!empty($id))
-            login($email, $id);
+        if (!empty($id)) {
+            $profile = db_get_profile($id);
+            login($profile);
+        }
         else
             header("Location: ../index.php");
     }

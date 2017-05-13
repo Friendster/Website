@@ -12,7 +12,7 @@ RewriteCond %{REQUEST_URI} !.*\.jpg$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.css$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.gif$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.js$ [NC]
-RewriteRule .* /index.php
+RewriteRule .* index.php
 
 #<Files *.php>
 #	deny from all

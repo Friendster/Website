@@ -89,7 +89,9 @@ if (isset($_POST["edit"])) {
         <?php
 
 
+        $modal_counter = 0;
         foreach ($posts as $post) {
+            $modal_counter++;
             $delete_button = ($user_name == $post['author']) ?
                 '<form method="post" action="#">
                     <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
@@ -101,14 +103,14 @@ if (isset($_POST["edit"])) {
                 </form>' : "";
 
             $edit_button = ($user_name == $post['author']) ?
-                '<a href="#edit-modal" data-toggle="modal">' .
+                '<a href="#edit-modal-' . $modal_counter . '" data-toggle="modal">' .
                 '<button name="edit" class="btn btn-primary pull-right btn-sm">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </button>' .
                 '</a>' : "";
 
             $edit_post = ($user_name == $post['author']) ?
-                '<div id="edit-modal" class="modal">
+                '<div id="edit-modal-' . $modal_counter . '" class="modal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

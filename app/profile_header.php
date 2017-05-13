@@ -9,9 +9,10 @@
 
 
 $profile = db_get_profile($_SESSION['user_id']);
-$img_name = empty($profile->profile_picture_name) ? "defaultImage.png" : $profile->profile_picture_name;
+$img_name = $profile->profile_picture_name;
+echo $img_name;
 $iv = $_SESSION["iv"];
-$encrypted_img_name = encrypt($img_name, $iv);
+$encrypted_img_name = urlencode(encrypt($img_name, $iv));
 $img_path = "app/image.php?file=" . $encrypted_img_name;
 
 include "profile_upload.php";

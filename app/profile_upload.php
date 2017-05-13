@@ -47,7 +47,6 @@ function validate_profile($file) {
 
     // Check if file is an image
     if ($image_file_size !== false) {
-        $message_upload .= "File is an image - " . $image_file_size["mime"] . ". ";
         $is_valid = true;
     } else {
         $error_upload .= "File is not an image. ";

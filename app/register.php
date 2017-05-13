@@ -36,8 +36,10 @@ if (isset($_POST['submit'])) {
             $profile = db_get_profile($id);
             login($profile);
         }
-        else
-            header("Location: ../index.php");
+        else {
+            // set_location_to_root();
+        }
+
     }
 }
 

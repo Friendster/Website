@@ -31,23 +31,18 @@ function db_create_user($email, $hashed_pw)
 {
     //todo: error check if db is unavailable
     $conn = connect_to_db();
-    $query = "INSERT INTO user (email, pass) VALUES(?, ?)";
+    $sql = "INSERT INTO user (email, pass) VALUES(?, ?)";
 
-    $stmt = $conn->stmt_init();
+    if ($stmt = $conn->prepare($sql)) {
 
-
-    if (!$stmt->prepare($query)) {
-        print "Failed to prepare statement\n";
-    } else {
-
+        // Bind user parameter
         $stmt->bind_param('ss', $email, $hashed_pw);
 
-        //execution on the information injection into the db
+        // Execute query
         $stmt->execute();
-
+        $stmt->close();
     }
 
-    $stmt->close();
     $conn->close();
 }
 

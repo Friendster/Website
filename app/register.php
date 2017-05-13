@@ -4,8 +4,6 @@
  * User: Boris
  */
 
-include "../include/header.php";
-include "../include/init.php";
 include "googlerecaptcha.php";
 include "login.php";
 
@@ -109,7 +107,7 @@ function verify_passwords($password)
 <div class="my-login-box panel panel-default">
     <div class="panel-body">
 
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
+        <form method="post" action="?page=register" autocomplete="off">
             <legend>Register for Friendster!</legend>
 
             <div class="form-group <?php echo !empty($email_error) ? "has-error" : ""; ?>">
@@ -142,12 +140,10 @@ function verify_passwords($password)
 
             <div class="form-buttons">
                 <button type="submit" name="submit" class="btn btn-primary">Register</button>
-                <a class="btn btn-default" href="login_page.php">Login</a>
+                <a class="btn btn-default" href="index.php">Login</a>
             </div>
 
         </form>
 
     </div>
 </div>
-
-<?php include "../include/footer.php"; ?>

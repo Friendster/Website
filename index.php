@@ -4,7 +4,12 @@ include "include/init.php";
 include "include/header.php";
 
 if (!isset($_SESSION["name"])) {
-    include "app/login_page.php";
+    if (isset($_GET['page']) && $_GET['page'] == 'register') {
+        include "app/register.php";
+    } else {
+        include "app/login_page.php";
+    }
+
 } else if (isset($_GET['page'])) {
     include('app/' . $_GET['page'] . '.php');
 } else {

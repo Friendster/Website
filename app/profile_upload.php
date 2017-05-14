@@ -28,7 +28,7 @@ if (isset($_POST["upload_profile"])) {
             // If upload was successful, update the db
             db_update_profile_picture($_SESSION["user_id"], $file_name);
 
-            set_location_to_root("?success=".urlencode($message_upload));
+            navigate_to("?success=".urlencode($message_upload));
         } else {
             $error_upload .= "Sorry, there was an error uploading your file.";
             $is_profile_valid = false;

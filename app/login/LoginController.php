@@ -50,7 +50,7 @@ class LoginController {
 
         // TODO add other profile details
 
-        set_location_to_root();
+        navigate_to();
     }
 
     public function onLogout()
@@ -60,7 +60,7 @@ class LoginController {
         $_SESSION = array();
         session_destroy();
 
-        set_location_to_root();
+        navigate_to();
     }
 
 }

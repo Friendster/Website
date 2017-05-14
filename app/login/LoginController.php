@@ -14,9 +14,9 @@ class LoginController {
     }
 
     public function onLogin() {
-        if (isset($_POST["submit"])) {
-            $this->model->setEmail($_POST["usr"]);
-            $this->model->setPassword($_POST["pass"]);
+        if (isset($_POST["login"])) {
+            $this->model->setEmail($_POST["email"]);
+            $this->model->setPassword($_POST["password"]);
 
             $is_user_valid = $this->model->validateEmail();
             $is_pass_valid = $this->model->validatePassword();

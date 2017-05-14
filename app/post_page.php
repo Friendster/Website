@@ -9,8 +9,8 @@
 //include "include/db.php";
 
 
-$user_name = $_SESSION["name"];
-$user_id = $_SESSION["user_id"];
+$user_name = $session->get(Properties::EMAIL);
+$user_id = $session->get(Properties::ID);
 $posts = db_get_posts();
 
 // Encrypt message

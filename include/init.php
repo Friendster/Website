@@ -25,7 +25,7 @@ include "app/googlerecaptcha.php";
 include "app/image_upload.php";
 
 
-function set_location_to_root($query = "")
+function navigate_to($query = "")
 {
     global $config;
     $root_location = ($config->host != "localhost") ? "/" : "index.php". $query;

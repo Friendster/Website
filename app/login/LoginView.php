@@ -61,8 +61,7 @@ class LoginView {
     
                     </form>
                 </div>
-            </div>'
-                ;
+            </div>';
 
         return $template;
     }

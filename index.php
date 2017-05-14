@@ -6,6 +6,10 @@ include "app/login/LoginController.php";
 include "app/login/LoginModel.php";
 include "app/login/LoginView.php";
 
+include "app/register/RegisterController.php";
+include "app/register/RegisterModel.php";
+include "app/register/RegisterView.php";
+
 if (is_page('image')) {
     include "app/image.php";
 } else {
@@ -14,7 +18,16 @@ if (is_page('image')) {
     if (is_page('register') && !is_logged_in()) {
 
         // Register page
-        include "app/register.php";
+//        include "app/register.php";
+
+        $register_model = new RegisterModel();
+        $register_controller = new RegisterController($register_model);
+        $register_controller->onRegister();
+
+        $register_view = new RegisterView($register_controller, $register_model);
+
+        echo $register_view->output();
+
 
     } else if (is_page('login') || !is_logged_in()) {
         // Login page

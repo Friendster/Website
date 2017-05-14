@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
 
     $content = $_POST['content'];
     db_create_post($user_id, $content);
-    set_location_to_root();
+    navigate_to();
 
 }
 
@@ -50,7 +50,7 @@ if (isset($_POST["delete"])) {
 
     if (is_post_author($user_id, $post_id)) {
         db_delete_post($post_id);
-        set_location_to_root();
+        navigate_to();
 
     }
 }
@@ -62,7 +62,7 @@ if (isset($_POST["edit"])) {
     $content = $_POST["edit-content"];
     if (is_post_author($user_id, $post_id)) {
         db_update_post($post_id, $content);
-        set_location_to_root();
+        navigate_to();
     }
 }
 

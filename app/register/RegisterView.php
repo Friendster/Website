@@ -4,7 +4,7 @@ class RegisterView {
     private $model;
     private $controller;
 
-    public function __construct($controller, $model) {
+    public function __construct(RegisterController $controller, RegisterModel $model) {
         $this->controller = $controller;
         $this->model = $model;
     }
@@ -14,7 +14,7 @@ class RegisterView {
         $email_error = $this->model->getEmailError();;
         $password_error = $this->model->getPasswordError();
         $password_verify_error = $this->model->getPasswordVerifyError();
-        $recaptcha_error = (!empty($this->model->recaptchaError)) ? '<p class="text-danger">' . $this->model->recaptchaError . '</p>' : '';
+        $recaptcha_error = (!empty($this->model->getRecaptchaError())) ? '<p class="text-danger">' . $this->model->getRecaptchaError() . '</p>' : '';
 
         $template =
             '<div class="my-login-box panel panel-default" xmlns="http://www.w3.org/1999/html">

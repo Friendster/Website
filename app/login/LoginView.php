@@ -10,7 +10,7 @@ class LoginView {
     private $model;
     private $controller;
 
-    public function __construct($controller, $model) {
+    public function __construct(LoginController $controller, LoginModel $model) {
         $this->controller = $controller;
         $this->model = $model;
     }

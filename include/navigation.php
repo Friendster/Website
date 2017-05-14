@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
             <ul class="nav navbar-nav navbar-right">
                 <li><?php echo "<p class=\"navbar-text\">Logged in as: " . htmlentities($_SESSION["name"]) ."</p>";?></li>
-                <li><a href="?page=logout">Logout</a></li>
+                <li><a href="?page=login">Logout</a></li>
             </ul>
         </div>
     </div>

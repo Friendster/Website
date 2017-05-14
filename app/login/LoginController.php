@@ -20,12 +20,7 @@ class LoginController {
 
             $is_user_valid = $this->model->validateEmail();
             $is_pass_valid = $this->model->validatePassword();
-            $is_recaptcha_valid = true;
-//            $is_recaptcha_valid = is_recapcha_valid($_POST["g-recaptcha-response"]);
-
-//            if (!$is_recaptcha_valid) {
-//                $recaptcha_error = "Please validate recapcha";
-//            }
+            $is_recaptcha_valid = $this->model->validateRecaptcha($_POST["g-recaptcha-response"]);
 
             // If user input is ok so far then QUERY db
             if ($is_user_valid && $is_pass_valid && $is_recaptcha_valid) {

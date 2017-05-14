@@ -21,7 +21,7 @@ class LoginView {
 
         $email_error = (!empty($this->model->emailError)) ? $this->model->emailError : '';
         $password_error = (!empty($this->model->passwordError)) ? $this->model->passwordError : '';
-        $recaptcha_error = (!empty($this->model->recaptchaError)) ? $this->model->recaptchaError : '';
+        $recaptcha_error = (!empty($this->model->recaptchaError)) ? '<p class="text-danger">' . $this->model->recaptchaError . '</p>' : '';
 
         $template =
             '<div class="my-login-box panel panel-default">
@@ -47,15 +47,13 @@ class LoginView {
                                 id="password"
                                 name="password" value="' . $this->model->getPassword() . '">
                         </div>
-    
-   
-                        <div class="">
-                            <div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
-                        </div>' .
-                
-                        $recaptcha_error .
-                
-                        '<div class="form-buttons">
+                        
+                        <div class="'. (!empty($recaptcha_error) ? 'recapcha-error' : '') . '">' .
+                            $recaptcha_error .
+                            '<div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
+                        </div>
+                        
+                        <div class="form-buttons">
                             <button type="submit" name="login" class="btn btn-primary">Login</button>
                             <a class="btn btn-default" href="?page=register">Register?</a>
                         </div>

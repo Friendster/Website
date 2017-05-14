@@ -4,7 +4,6 @@
  * User: Boris
  */
 
-include "googlerecaptcha.php";
 include "login.php";
 
 

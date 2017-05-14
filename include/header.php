@@ -28,7 +28,7 @@ function get_style() {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
     <link rel="stylesheet" href=<?php echo get_style();?> type="text/css">
-    <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/188.226.140.147"><img src="https://seal.beyondsecurity.com/verification-images/188.226.140.147/vulnerability-scanner-2.gif" alt="Website Security Test" border="0" /></a>
+
 </head>
 <body>
 <div class="container-fluid nopadding">

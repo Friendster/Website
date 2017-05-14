@@ -117,7 +117,7 @@ function verify_passwords($password)
                 <label class="control-label" for="email">
                     Email <?php if (!empty($email_error)) echo $email_error; ?>
                 </label>
-                <input type="text" class="form-control" name="email" id="email" value="<?php echo "$email"; ?>">
+                <input type="text" class="form-control" name="email" id="email" value="<?php echo htmlentities($email); ?>">
             </div>
 
             <div class="form-group <?php echo !empty($password_error) ? "has-error" : ""; ?>">
@@ -125,7 +125,7 @@ function verify_passwords($password)
                     Secret Magical Password <?php if (!empty($password_error)) echo $password_error; ?>
                 </label>
                 <input type="password" class="form-control" id="password" name="password"
-                       value="<?php echo "$password"; ?>">
+                       value="<?php echo htmlentities($password); ?>">
             </div>
 
             <div class="form-group <?php echo !empty($verify_password_error) ? "has-error" : ""; ?>">
@@ -133,7 +133,7 @@ function verify_passwords($password)
                     Verify Magical Password <?php if (!empty($verify_password_error)) echo $verify_password_error; ?>
                 </label>
                 <input type="password" class="form-control" id="verify_password" name="verify_password"
-                       value="<?php echo "$verify_password"; ?>">
+                       value="<?php echo htmlentities($verify_password); ?>">
             </div>
 
             <div class="<?php echo empty($recapcha_error) ? "" : "recapcha-error"; ?>">

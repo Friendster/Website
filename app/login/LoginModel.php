@@ -41,6 +41,14 @@ class LoginModel {
         return $is_valid;
     }
 
+    public function validateRecaptcha($value)
+    {
+        $is_valid = is_recapcha_valid($value);
+        $this->recaptchaError = $is_valid ? '' : 'Please validate recapcha';
+
+        return $is_valid;
+    }
+
     public function verifyLogin() {
         $db_user = db_get_user($this->email);
         $hashed_pw = $db_user->password;

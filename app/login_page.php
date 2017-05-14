@@ -1,6 +1,5 @@
 <?php
 
-include "googlerecaptcha.php";
 include "login.php";
 
 

@@ -8,7 +8,7 @@
  */
 
 
-$profile = db_get_profile($_SESSION['user_id']);
+$profile = db_get_profile($session->get(Properties::ID));
 $img_name = empty($profile->profile_picture_name) ? "oOskDVlsS002iszDIcrWqdckY8aM8k.png" : $profile->profile_picture_name;
 $iv = $_SESSION["iv"];
 $encrypted_img_name = urlencode(encrypt($img_name, $iv));

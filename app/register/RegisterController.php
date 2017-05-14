@@ -26,38 +26,12 @@ class RegisterController {
 
             $is_recaptcha_valid = $this->model->validateRecaptcha($_POST["g-recaptcha-response"]);
 
-            if ($is_email_valid && $is_password_valid && $are_passwords_verified) {
+            if ($is_email_valid && $is_password_valid && $are_passwords_verified && $is_recaptcha_valid) {
                 $user_id = $this->model->registerUser();
-                $this->login($user_id);
+                $profile = db_get_profile($user_id);;
+                $session->login($profile);
             }
 
         }
-    }
-
-    private function login($user_id) {
-
-        if (!empty($user_id)) {
-            $profile = db_get_profile($user_id);
-//            login($profile);
-
-
-            //session_start();
-
-            // TODO refactor session name -> email
-
-            // TODO encapsulate session into a session object
-            $_SESSION["name"] = $profile->email;
-            $_SESSION["user_id"] = $profile->id;
-            $_SESSION["profile_picture_name"] = $profile->profile_picture_name;
-
-            // TODO add other profile details
-
-            navigate_to();
-
-
-        }
-
-
-
     }
 }

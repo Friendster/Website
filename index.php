@@ -1,14 +1,9 @@
 <?php
 include "include/init.php";
 
-// TODO move this to init
-include "app/login/LoginController.php";
-include "app/login/LoginModel.php";
-include "app/login/LoginView.php";
 
-include "app/register/RegisterController.php";
-include "app/register/RegisterModel.php";
-include "app/register/RegisterView.php";
+
+
 
 if (is_page('image')) {
     include "app/image.php";
@@ -31,12 +26,14 @@ if (is_page('image')) {
 
     } else if (is_page('login') || !is_logged_in()) {
         // Login page
-        $login_model = new LoginModel();
+
+             $login_model = new LoginModel();
+
         $login_controller = new LoginController($login_model);
         $login_view = new LoginView($login_controller, $login_model);
 
         if (is_logged_in()) {
-            $login_controller->onLogout();
+            $session->logout();
         } else {
             $login_controller->onLogin();
         }
@@ -64,14 +61,13 @@ if (is_page('image')) {
 
 
 function is_logged_in() {
-    return isset($_SESSION["name"]);
+    global $session;
+    return $session->get(Properties::ID) != null;
 }
 
 function is_page($name) {
     return isset($_GET['page']) && $_GET['page'] == $name;
 }
-
-
 
 
 

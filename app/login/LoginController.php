@@ -14,7 +14,8 @@ class LoginController {
     }
 
     public function onLogin() {
-        if (isset($_POST["login"])) {
+        global $session;
+        if (isset($_POST["login"]) && $_POST["token"]  == $session->get(Properties::TOKEN)) {
             $this->model->setEmail($_POST["email"]);
             $this->model->setPassword($_POST["password"]);
 
@@ -37,7 +38,8 @@ class LoginController {
 
     private function login($profile)
     {
-        session_start();
+
+        //session_start();
 
         // TODO refactor session name -> email
 

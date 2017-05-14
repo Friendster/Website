@@ -7,29 +7,20 @@
 
 //$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
 //$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
+include "app/Session.php";
+$session = new Session();
 
-
-session_start();
-//Regenerate session every 5 minutes
-if (!isset($_SESSION['CREATED'])) {
-    $_SESSION['CREATED'] = time();
-} else if (time() - $_SESSION['CREATED'] > 300) {
-    // session started more than 5 minutes ago
-    session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
-    $_SESSION['CREATED'] = time();  // update creation time
+$session->tryDestroySession();
+$session->tryRegenerateSession();
+include "crypt.php";
+if ($session->get(Properties::TOKEN) == null) {
+    $session->set(Properties::TOKEN, generate_name_from_iv());
 }
-//Destroy session if last activity was 10 minutes ago
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 600)) {
-    // last request was more than 10 minutes ago
-    session_unset();     // unset $_SESSION variable for the run-time
-    session_destroy();   // destroy session data in storage
-}
-$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
 
 include "config.php";
 include "db.php";
-include "crypt.php";
+
 include "app/googlerecaptcha.php";
 include "app/image_upload.php";
 

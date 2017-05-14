@@ -16,6 +16,7 @@ class LoginView {
     }
 
     public function output() {
+        global $session;
         $login_error = (!empty($this->model->loginError))
             ? '<div class="alert alert-danger" role="alert"><strong>Oh snap!</strong>' . $this->model->loginError . '</div>' : '';
 
@@ -24,7 +25,7 @@ class LoginView {
         $recaptcha_error = (!empty($this->model->recaptchaError)) ? '<p class="text-danger">' . $this->model->recaptchaError . '</p>' : '';
 
         $template =
-            '<div class="my-login-box panel panel-default">
+            '<div class="my-login-box panel panel-default" xmlns="http://www.w3.org/1999/html">
                 <div class="panel-body">
                     <form method="post" action="?page=login" autocomplete="off">
                         <legend>Enter Wonderland!</legend>' .
@@ -52,7 +53,7 @@ class LoginView {
                             $recaptcha_error .
                             '<div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
                         </div>
-                        
+                        <input type="hidden" name="token" value="'.$session->get(Properties::TOKEN).'">
                         <div class="form-buttons">
                             <button type="submit" name="login" class="btn btn-primary">Login</button>
                             <a class="btn btn-default" href="?page=register">Register?</a>

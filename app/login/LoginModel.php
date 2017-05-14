@@ -16,6 +16,7 @@ class LoginModel {
     public $loginError;
 
     public function __construct(){
+        $this->id = '';
         $this->email = '';
         $this->password = '';
         $this->emailError = '';

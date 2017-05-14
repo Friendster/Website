@@ -24,6 +24,8 @@ function get_style() {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="detectify-verification"
+          content="8bb11b03bc4934bd011683bb3796d5a0" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">

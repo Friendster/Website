@@ -27,26 +27,20 @@ class LoginModel {
 
     public function validateEmail()
     {
-        $is_valid = !empty($this->email);
-        $this->emailError = $is_valid ? '' : 'is required';
-
-        return $is_valid;
+        $this->emailError = ValidationHandler::validateRequired($this->email);
+        return ValidationHandler::isValid($this->emailError);
     }
 
     public function validatePassword()
     {
-        $is_valid = !empty($this->password);
-        $this->passwordError = $is_valid ? '' : 'is required';
-
-        return $is_valid;
+        $this->passwordError = ValidationHandler::validateRequired($this->password);
+        return ValidationHandler::isValid($this->passwordError);
     }
 
     public function validateRecaptcha($value)
     {
-        $is_valid = is_recapcha_valid($value);
-        $this->recaptchaError = $is_valid ? '' : 'Please validate recapcha';
-
-        return $is_valid;
+        $this->recaptchaError = ValidationHandler::validateRecaptcha($value);
+        return ValidationHandler::isValid($this->recaptchaError);
     }
 
     public function verifyLogin() {

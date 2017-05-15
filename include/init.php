@@ -42,6 +42,7 @@ function navigate_to($query = "")
 //$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
 //$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
 
+include "util/ValidationHandler.php";
 include "app/login/LoginController.php";
 include "app/login/LoginModel.php";
 include "app/login/LoginView.php";

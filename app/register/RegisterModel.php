@@ -38,50 +38,26 @@ class RegisterModel {
     }
 
     public function validateEmail() {
-
-        if (empty($this->email)) {
-            $this->emailError = "is required";
-        } // Checks to see if user input is a valid email address
-        elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $this->emailError = "is NOT valid!";
-        } // Check if user exists
-        elseif (!empty($user = db_get_user($this->email)->id)) {
-            $this->emailError = "has been registered";
-        }
-        return empty($this->emailError);
+        $this->emailError = ValidationHandler::validateEmail($this->email);
+        return ValidationHandler::isValid($this->emailError);
     }
 
     public function validatePassword() {
-
-        // Validate not empty
-        if (empty($this->password)) {
-            $this->passwordError = "is required";
-        } // TODO add comments
-        elseif (strlen($this->password) < '8') {
-            $this->passwordError = "must contain at least 8 characters!";
-        } elseif (!preg_match("#[0-9]+#", $this->password)) {
-            $this->passwordError = "must contain at least 1 number!";
-        } elseif (!preg_match("#[A-Z]+#", $this->password)) {
-            $this->passwordError = "must contain at least 1 capital letter!";
-        } elseif (!preg_match("#[a-z]+#", $this->password)) {
-            $this->passwordError = "must contain at least 1 lowercase letter!";
-        }
-
-        // Is valid if there is no error
-        return empty($this->passwordError);
+        $this->passwordError = ValidationHandler::validatePassword($this->password);
+        return ValidationHandler::isValid($this->passwordError);
     }
 
     public function verifyPasswords() {
 
-        // Validate not empty
-        if (empty($this->passwordVerify)) {
-            $this->passwordVerifyError = "is required";
-        } // Checks if the two user password input match
-        elseif ($this->password !== $this->passwordVerify) {
+        $this->passwordVerifyError = ValidationHandler::validateRequired($this->passwordVerify);
+
+        // Checks if the two user password input match
+        if(ValidationHandler::isValid($this->passwordVerifyError)
+            && $this->password !== $this->passwordVerify) {
             $this->passwordVerifyError = " must match password";
         }
 
-        return empty($this->passwordVerifyError);
+        return ValidationHandler::isValid($this->passwordVerifyError);
     }
 
     public function validateRecaptcha($value)

@@ -12,15 +12,15 @@ RewriteCond %{REQUEST_URI} !.*\.jpg$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.css$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.gif$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.js$ [NC]
-RewriteRule .* index.php
+RewriteRule .* public/index.php
 
 #<Files *.php>
 #	deny from all
 #</Files>
-<Files "index.php">
-	Order Allow,Deny
-	Allow from all
-</Files>
+#<Files "public/index.php">
+#	Order Allow,Deny
+#	Allow from all
+#</Files>
 
 
 #<Files "regisrer.php">

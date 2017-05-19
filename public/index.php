@@ -1,11 +1,11 @@
 <?php
-include "system/init.php";
+include "../system/init.php";
 
 if (is_page('image')) {
-    include "app/image.php";
+    include "../app/image.php";
 } else {
 
-    include "system/header.php";
+    include "../system/header.php";
     if (is_page('register') && !is_logged_in()) {
 
         // Register page
@@ -40,18 +40,18 @@ if (is_page('image')) {
 
         if(isset($_GET['page'])) {
             // Generic page
-            include('app/' . $_GET['page'] . '.php');
+            include('../app/' . $_GET['page'] . '.php');
         } else {
 
             // Include frontpage
-            include "system/navigation.php";
-            include "app/profile_header.php";
-            include "app/post_page.php";
+            include "../system/navigation.php";
+            include "../app/profile_header.php";
+            include "../app/post_page.php";
         }
 
     }
 
-    include "system/footer.php";
+    include "../system/footer.php";
 
 }
 

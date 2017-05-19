@@ -6,7 +6,7 @@
  * Date: 15-May-17
  * Time: 1:31
  */
-class ValidationHandler {
+class ValidationManager {
 
     public static function validateRequired($value) {
         $error = '';
@@ -18,9 +18,9 @@ class ValidationHandler {
     }
 
     public static function validatePassword($password) {
-        $error = ValidationHandler::validateRequired($password);
+        $error = ValidationManager::validateRequired($password);
 
-        if (!ValidationHandler::isValid($error)) {}
+        if (!ValidationManager::isValid($error)) {}
         elseif(strlen($password) < '8') {
             $error = 'must contain at least 8 characters!';
         } elseif (!preg_match('#[0-9]+#', $password)) {
@@ -35,9 +35,9 @@ class ValidationHandler {
     }
 
     public static function validateEmail($email) {
-        $error = ValidationHandler::validateRequired($email);
+        $error = ValidationManager::validateRequired($email);
 
-        if (!ValidationHandler::isValid($error)) {}
+        if (!ValidationManager::isValid($error)) {}
         elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = 'is NOT valid!';
         } // Check if user exists

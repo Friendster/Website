@@ -38,26 +38,26 @@ class RegisterModel {
     }
 
     public function validateEmail() {
-        $this->emailError = ValidationHandler::validateEmail($this->email);
-        return ValidationHandler::isValid($this->emailError);
+        $this->emailError = ValidationManager::validateEmail($this->email);
+        return ValidationManager::isValid($this->emailError);
     }
 
     public function validatePassword() {
-        $this->passwordError = ValidationHandler::validatePassword($this->password);
-        return ValidationHandler::isValid($this->passwordError);
+        $this->passwordError = ValidationManager::validatePassword($this->password);
+        return ValidationManager::isValid($this->passwordError);
     }
 
     public function verifyPasswords() {
 
-        $this->passwordVerifyError = ValidationHandler::validateRequired($this->passwordVerify);
+        $this->passwordVerifyError = ValidationManager::validateRequired($this->passwordVerify);
 
         // Checks if the two user password input match
-        if(ValidationHandler::isValid($this->passwordVerifyError)
+        if(ValidationManager::isValid($this->passwordVerifyError)
             && $this->password !== $this->passwordVerify) {
             $this->passwordVerifyError = " must match password";
         }
 
-        return ValidationHandler::isValid($this->passwordVerifyError);
+        return ValidationManager::isValid($this->passwordVerifyError);
     }
 
     public function validateRecaptcha($value)

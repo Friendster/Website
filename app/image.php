@@ -4,7 +4,7 @@
 $iv = $_SESSION["iv"];
 $file_name = urldecode(decrypt($_GET["file"], $iv));
 $file_name = sanitize($file_name);
-$target_file = "../uploads/" . $file_name;
+$target_file = "../../uploads/" . $file_name;
 
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 header("Content-type: " . finfo_file($finfo, $target_file));

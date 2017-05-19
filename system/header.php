@@ -9,7 +9,7 @@ function get_style() {
     $port = (!empty($config->port)) ? ':' . $config->port : '';
     $customPath = ($host === 'localhost') ? $config->path : '';
 
-    $link = $protocol . $host . $port . $customPath . '/css/mystyle.css';
+    $link = $protocol . $host . $port . $customPath . '/public/assets/css/mystyle.css';
 
     return $link;
 }

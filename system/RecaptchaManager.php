@@ -26,6 +26,6 @@ class RecaptchaManager {
         $verify = file_get_contents($url, false, $context);
         $captcha_success = json_decode($verify);
 
-        return (Config::host != "localhost") ? $captcha_success->success : true;
+        return (Config::$host != "localhost") ? $captcha_success->success : true;
     }
 }

@@ -8,9 +8,9 @@
  */
 
 
-$profile = db_get_profile($session->get(Properties::ID));
+$profile = Database::getProfile($session->get(Properties::ID));
 $img_name = empty($profile->profile_picture_name) ? "oOskDVlsS002iszDIcrWqdckY8aM8k.png" : $profile->profile_picture_name;
-$iv = $_SESSION["iv"];
+$iv = $session->get(Properties::IV);
 $encrypted_img_name = urlencode(EncryptionManager::encrypt($img_name, $iv));
 $img_path = "?page=image&file=" . $encrypted_img_name;
 

@@ -28,7 +28,7 @@ class RegisterController {
 
             if ($is_email_valid && $is_password_valid && $are_passwords_verified && $is_recaptcha_valid) {
                 $user_id = $this->model->registerUser();
-                $profile = db_get_profile($user_id);;
+                $profile = Database::getProfile($user_id);;
                 $session->login($profile);
             }
 

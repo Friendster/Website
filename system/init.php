@@ -6,42 +6,37 @@
 include "../system/session/Properties.php";
 include "../system/session/SessionManager.php";
 
+
+
 $session = new SessionManager();
 
 $session->tryDestroySession();
-
 $session->tryRegenerateSession();
-
 include "EncryptionManager.php";
-
 // Set static IV
 if ($session->get(Properties::IV) == null) {
-    $session->set(Properties::TOKEN, EncryptionManager::generateIv());
+    $session->set(Properties::IV, EncryptionManager::generateIv());
 }
-
 if ($session->get(Properties::TOKEN) == null) {
     $session->set(Properties::TOKEN, EncryptionManager::generateNameFromIv());
 }
 
 
-
 include "Config.php";
-include "../system/db.php";
+include "Database.php";
 
-include "RecaptchaManager.php";
+
+
 include "../app/image_upload.php";
 
 
 function navigate_to($query = "")
 {
     $root_location = (Config::$host != "localhost") ? "/" : "index.php". $query;
-
     header("Location:" . $root_location);
 }
 
-//$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
-//$configs = system($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
-
+include "RecaptchaManager.php";
 include "ValidationManager.php";
 
 include "../app/controller/LoginController.php";

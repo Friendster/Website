@@ -23,9 +23,10 @@ if (is_page('image')) {
     } else if (is_page('login') || !is_logged_in()) {
         // Login page
 
-             $login_model = new LoginModel();
+        $login_model = new LoginModel();
 
         $login_controller = new LoginController($login_model);
+
         $login_view = new LoginView($login_controller, $login_model);
 
         if (is_logged_in()) {

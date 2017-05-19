@@ -32,8 +32,8 @@ class RegisterModel {
             'cost' => 11
         ];
         $hashed_pw = base64_encode(password_hash($this->password, PASSWORD_BCRYPT, $options));
-        db_create_user($this->email, $hashed_pw);
-        $user_id = db_get_user($this->email)->id;
+        Database::createUser($this->email, $hashed_pw);
+        $user_id = Database::getUser($this->email)->id;
         return $user_id;
     }
 

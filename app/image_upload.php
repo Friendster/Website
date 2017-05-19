@@ -7,7 +7,7 @@
  */
 
 function upload($file, $file_name) {
-    $target_file = "../uploads/" . $file_name;
+    $target_file = "../../uploads/" . $file_name;
 
     if (move_uploaded_file($file, $target_file)) {
         // If we successfully move file, then edit permissions

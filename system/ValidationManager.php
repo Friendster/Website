@@ -50,7 +50,7 @@ class ValidationManager {
 
     public static function validateRecaptcha($value) {
         $error = '';
-        if (!is_recapcha_valid($value)) {
+        if (!RecaptchaManager::isRecaptchaValid($value)) {
             $error = 'Please validate recapcha';
         }
 

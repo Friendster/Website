@@ -28,7 +28,7 @@ if ($session->get(Properties::TOKEN) == null) {
 include "../config.php";
 include "../system/db.php";
 
-include "../util/googlerecaptcha.php";
+include "RecaptchaManager.php";
 include "../app/image_upload.php";
 
 

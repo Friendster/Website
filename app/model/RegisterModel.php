@@ -62,7 +62,7 @@ class RegisterModel {
 
     public function validateRecaptcha($value)
     {
-        $is_valid = is_recapcha_valid($value);
+        $is_valid = RecaptchaManager::isRecaptchaValid($value);
         $this->recaptchaError = $is_valid ? '' : 'Please validate recapcha';
 
         return $is_valid;

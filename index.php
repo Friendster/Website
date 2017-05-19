@@ -1,10 +1,6 @@
 <?php
 include "include/init.php";
 
-
-
-
-
 if (is_page('image')) {
     include "app/image.php";
 } else {

@@ -1,6 +1,6 @@
 <?php
 
-class Session {
+class SessionManager {
 
     public function __construct() {
         session_start();

@@ -4,9 +4,9 @@
  */
 
 include "../system/session/Properties.php";
-include "../system/session/Session.php";
+include "../system/session/SessionManager.php";
 
-$session = new Session();
+$session = new SessionManager();
 
 $session->tryDestroySession();
 

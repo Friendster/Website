@@ -35,7 +35,7 @@ function navigate_to($query = "")
 }
 
 //$customPath = (empty($_SERVER['HTTPS'])) ? '/Friendster' : '';
-//$configs = include($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
+//$configs = system($_SERVER['DOCUMENT_ROOT'] . $customPath . '/config.php');
 
 include "util/ValidationHandler.php";
 

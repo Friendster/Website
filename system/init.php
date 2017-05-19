@@ -25,7 +25,7 @@ if ($session->get(Properties::TOKEN) == null) {
 
 
 
-include "../config.php";
+include "Config.php";
 include "../system/db.php";
 
 include "RecaptchaManager.php";
@@ -34,8 +34,7 @@ include "../app/image_upload.php";
 
 function navigate_to($query = "")
 {
-    global $config;
-    $root_location = ($config->host != "localhost") ? "/" : "index.php". $query;
+    $root_location = (Config::$host != "localhost") ? "/" : "index.php". $query;
 
     header("Location:" . $root_location);
 }

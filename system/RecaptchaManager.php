@@ -8,10 +8,9 @@
 
 class RecaptchaManager {
     public static function isRecaptchaValid($response) {
-        global $config;
-        $secret = "6LcpFBoUAAAAALNJMzRqz3XcQHW3XHl_IpC11xeU";
+        $secret = Config::$recaptchaSecret;
+        $url = Config::$recaptchaUrl;
 
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = array(
             'secret' => $secret,
             'response' => $response
@@ -27,6 +26,6 @@ class RecaptchaManager {
         $verify = file_get_contents($url, false, $context);
         $captcha_success = json_decode($verify);
 
-        return ($config->host != "localhost") ? $captcha_success->success : true;
+        return (Config::host != "localhost") ? $captcha_success->success : true;
     }
 }

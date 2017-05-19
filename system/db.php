@@ -10,12 +10,10 @@
 
 function connect_to_db()
 {
-    global $config;
-
-    $host = $config->database_host;
-    $username = $config->username;
-    $password = $config->password;
-    $db = $config->database;
+    $host = Config::database_host;
+    $username = Config::username;
+    $password = Config::password;
+    $db = Config::database;
 
     // Create connection
     $conn = new mysqli($host, $username, $password, $db);

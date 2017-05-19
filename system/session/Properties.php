@@ -8,4 +8,5 @@ abstract class Properties {
     const TOKEN = 'TOKEN';
     const CREATED = 'CREATED';
     const LAST_ACTIVITY = 'LAST_ACTIVITY';
+    const IV = 'IV';
 }

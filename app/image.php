@@ -2,7 +2,7 @@
 
 
 $iv = $_SESSION["iv"];
-$file_name = urldecode(decrypt($_GET["file"], $iv));
+$file_name = urldecode(EncryptionManager::decrypt($_GET["file"], $iv));
 $file_name = sanitize($file_name);
 $target_file = "../../uploads/" . $file_name;
 

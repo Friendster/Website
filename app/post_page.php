@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 
 //TODO need post id
 if (isset($_POST["delete"])) {
-    $post_id = decrypt($_POST["id"], $iv);
+    $post_id = EncryptionManager::decrypt($_POST["id"], $iv);
 
     if (is_post_author($user_id, $post_id)) {
         db_delete_post($post_id);
@@ -58,7 +58,7 @@ if (isset($_POST["delete"])) {
 //TODO: need post content, post id  HELP?
 if (isset($_POST["edit"])) {
 
-    $post_id = decrypt($_POST["id"], $iv);
+    $post_id = EncryptionManager::decrypt($_POST["id"], $iv);
     $content = $_POST["edit-content"];
     if (is_post_author($user_id, $post_id)) {
         db_update_post($post_id, $content);
@@ -94,7 +94,7 @@ if (isset($_POST["edit"])) {
             $modal_counter++;
             $delete_button = ($user_name == $post['author']) ?
                 '<form method="post" action="#">
-                    <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
+                    <input type="hidden" name="id" value=' . EncryptionManager::encrypt($post['post_id'], $iv) . ' />
 
                     <button name="delete" type="submit" class="btn btn-danger pull-right btn-sm gap">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -123,7 +123,7 @@ if (isset($_POST["edit"])) {
                                       enctype="multipart/form-data"
                                       class="form-vertical">
 
-                                    <input type="hidden" name="id" value=' . encrypt($post['post_id'], $iv) . ' />
+                                    <input type="hidden" name="id" value=' . EncryptionManager::encrypt($post['post_id'], $iv) . ' />
                                     <div class="form-group">
                                         <textarea name="edit-content" class="form-control" rows="3" id="edit-text-area">' . $post['content'] . '</textarea>
                                     </div>

@@ -12,9 +12,15 @@ $session->tryDestroySession();
 
 $session->tryRegenerateSession();
 
-include "../util/crypt.php";
+include "../util/EncryptionManager.php";
+
+// Set static IV
+if ($session->get(Properties::IV) == null) {
+    $session->set(Properties::TOKEN, EncryptionManager::generateIv());
+}
+
 if ($session->get(Properties::TOKEN) == null) {
-    $session->set(Properties::TOKEN, generate_name_from_iv());
+    $session->set(Properties::TOKEN, EncryptionManager::generateNameFromIv());
 }
 
 

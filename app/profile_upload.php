@@ -17,7 +17,7 @@ if (isset($_POST["upload_profile"])) {
     $image_file_type = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
 
     $file_name = (empty($_SESSION["profile_picture_name"]))
-        ? generate_name_from_iv() . $_SESSION["user_id"] . "." . $image_file_type
+        ? EncryptionManager::generateNameFromIv() . $_SESSION["user_id"] . "." . $image_file_type
         : $_SESSION["profile_picture_name"];
 
     if ($is_profile_valid) {

@@ -41,7 +41,7 @@ class ValidationManager {
         elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = 'is NOT valid!';
         } // Check if user exists
-        elseif (!empty($user = db_get_user($email)->id)) {
+        elseif (!empty($user = Database::getUser($email)->id)) {
             $error = 'has been registered';
         }
 

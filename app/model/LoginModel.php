@@ -44,7 +44,7 @@ class LoginModel {
     }
 
     public function verifyLogin() {
-        $db_user = db_get_user($this->email);
+        $db_user = Database::getUser($this->email);
         $hashed_pw = $db_user->password;
         $this->id = $db_user->id;
 
@@ -60,7 +60,7 @@ class LoginModel {
     }
 
     public function getProfile() {
-        return db_get_profile($this->id);
+        return Database::getProfile($this->id);
     }
 
     public function getEmail() {

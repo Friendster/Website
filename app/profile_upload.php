@@ -16,9 +16,9 @@ if (isset($_POST["upload_profile"])) {
 
     $image_file_type = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
 
-    $file_name = (empty($_SESSION["profile_picture_name"]))
-        ? EncryptionManager::generateNameFromIv() . $_SESSION["user_id"] . "." . $image_file_type
-        : $_SESSION["profile_picture_name"];
+    $file_name = ($session->get(Properties::PROFILE_PICTIRE_NAME) == null)
+        ? EncryptionManager::generateNameFromIv() . $session->get(Properties::ID) . "." . $image_file_type
+        : $session->get(Properties::PROFILE_PICTIRE_NAME);
 
     if ($is_profile_valid) {
         // If everything is ok, try to upload file
@@ -26,7 +26,7 @@ if (isset($_POST["upload_profile"])) {
             $message_upload .= "The file " . basename($file["name"]) . " has been uploaded. ";
 
             // If upload was successful, update the db
-            db_update_profile_picture($_SESSION["user_id"], $file_name);
+            Database::updateProfilePicture($session->get(Properties::ID), $file_name);
 
             navigate_to("?success=".urlencode($message_upload));
         } else {

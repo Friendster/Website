@@ -1,7 +1,6 @@
 <?php
 
-
-$iv = $_SESSION["iv"];
+$iv = $session->get(Properties::IV);
 $file_name = urldecode(EncryptionManager::decrypt($_GET["file"], $iv));
 $file_name = sanitize($file_name);
 $target_file = "../../uploads/" . $file_name;

@@ -6,15 +6,12 @@
  * Time: 17:50
  */
 
-//system "system/db.php";
-
-
 $user_name = $session->get(Properties::EMAIL);
 $user_id = $session->get(Properties::ID);
-$posts = db_get_posts();
+$posts = Database::getPosts();
 
 // Encrypt message
-$iv = $_SESSION["iv"];
+$iv = $session->get(Properties::IV);
 
 
 function find($post_id) {
@@ -39,7 +36,7 @@ function is_post_author($user_id, $post_id) {
 if (isset($_POST['submit'])) {
 
     $content = $_POST['content'];
-    db_create_post($user_id, $content);
+    Database::createPost($user_id, $content);
     navigate_to();
 
 }
@@ -49,7 +46,7 @@ if (isset($_POST["delete"])) {
     $post_id = EncryptionManager::decrypt($_POST["id"], $iv);
 
     if (is_post_author($user_id, $post_id)) {
-        db_delete_post($post_id);
+        Database::deletePost($post_id);
         navigate_to();
 
     }
@@ -61,7 +58,7 @@ if (isset($_POST["edit"])) {
     $post_id = EncryptionManager::decrypt($_POST["id"], $iv);
     $content = $_POST["edit-content"];
     if (is_post_author($user_id, $post_id)) {
-        db_update_post($post_id, $content);
+        Database::updatePost($post_id, $content);
         navigate_to();
     }
 }

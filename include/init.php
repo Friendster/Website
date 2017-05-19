@@ -39,10 +39,10 @@ function navigate_to($query = "")
 
 include "util/ValidationHandler.php";
 
-include "app/login/LoginController.php";
-include "app/login/LoginModel.php";
-include "app/login/LoginView.php";
+include "app/controller/LoginController.php";
+include "app/model/LoginModel.php";
+include "app/view/LoginView.php";
 
-include "app/register/RegisterController.php";
-include "app/register/RegisterModel.php";
-include "app/register/RegisterView.php";
+include "app/controller/RegisterController.php";
+include "app/model/RegisterModel.php";
+include "app/view/RegisterView.php";

@@ -12,7 +12,7 @@ $session->tryDestroySession();
 
 $session->tryRegenerateSession();
 
-include "../util/EncryptionManager.php";
+include "EncryptionManager.php";
 
 // Set static IV
 if ($session->get(Properties::IV) == null) {

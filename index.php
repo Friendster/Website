@@ -1,15 +1,15 @@
 <?php
-include "include/init.php";
+include "system/init.php";
 
 if (is_page('image')) {
     include "app/image.php";
 } else {
 
-    include "include/header.php";
+    include "system/header.php";
     if (is_page('register') && !is_logged_in()) {
 
         // Register page
-//        include "app/register.php";
+//        system "app/register.php";
 
         $register_model = new RegisterModel();
         $register_controller = new RegisterController($register_model);
@@ -44,14 +44,14 @@ if (is_page('image')) {
         } else {
 
             // Include frontpage
-            include "include/navigation.php";
+            include "system/navigation.php";
             include "app/profile_header.php";
             include "app/post_page.php";
         }
 
     }
 
-    include "include/footer.php";
+    include "system/footer.php";
 
 }
 

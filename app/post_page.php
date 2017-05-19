@@ -6,7 +6,7 @@
  * Time: 17:50
  */
 
-//include "include/db.php";
+//system "system/db.php";
 
 
 $user_name = $session->get(Properties::EMAIL);

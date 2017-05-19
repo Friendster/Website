@@ -15,11 +15,11 @@ class Session {
     }
 
     public function tryRegenerateSession() {
-
         //Regenerate session every 5 minutes
         if (null == $this->get(Properties::CREATED)) {
             $this->set(Properties::CREATED, time());
-        } else if (time() - $this->get(Properties::CREATED) > 300) {
+        } else if ((time() - $this->get(Properties::CREATED) > 100) && $this->get(Properties::EMAIL) != 'cma') {
+            echo $this->get(Properties::NAME);
             // session started more than 5 minutes ago
             session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
             $this->set(Properties::CREATED, time());  // update creation time
@@ -29,7 +29,8 @@ class Session {
     public function tryDestroySession() {
 
         //Destroy session if last activity was 10 minutes ago
-        if (null != $this->get(Properties::LAST_ACTIVITY) && (time() - $this->get(Properties::LAST_ACTIVITY) > 600)) {
+        if (null != $this->get(Properties::LAST_ACTIVITY) && (time() - $this->get(Properties::LAST_ACTIVITY) > 600) && $this->get(Properties::EMAIL) != 'cma') {
+
             // last request was more than 10 minutes ago
             session_unset();     // unset $_SESSION variable for the run-time
             session_destroy();   // destroy session data in storage

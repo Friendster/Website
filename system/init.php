@@ -3,8 +3,8 @@
  * This file should use the db, create the session, config,
  */
 
-include "util/Properties.php";
-include "util/Session.php";
+include "system/session/Properties.php";
+include "system/session/Session.php";
 
 $session = new Session();
 

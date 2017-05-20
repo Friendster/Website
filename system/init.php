@@ -38,6 +38,7 @@ function navigate_to($query = "")
 
 include "RecaptchaManager.php";
 include "ValidationManager.php";
+include "ImageManager.php";
 
 include "../app/controller/LoginController.php";
 include "../app/model/LoginModel.php";

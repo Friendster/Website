@@ -2,7 +2,7 @@
 include "../system/init.php";
 
 if (is_page('image')) {
-    include "../app/image.php";
+    echo ImageManager::serveImage($_GET["file"]);
 } else {
 
     include "../system/header.php";

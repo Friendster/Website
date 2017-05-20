@@ -50,7 +50,7 @@ class PostView {
         return '<div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title col-xs-8 pull-left">' .
-                    $post->getAuthor()->getName() .
+                    $post->getAuthor()->getEmail() .
                 '</h3>' .
                 $this->deleteButtonOutput($post) .
                 $this->editButtonOutput($post, $modalCount) .

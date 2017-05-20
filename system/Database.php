@@ -7,21 +7,33 @@
  */
 // TODO UPDATE TO PDO
 class Database {
-
+    private static $connection;
+    
     private static function connectToDatabase() {
-        $host = Config::$database_host;
-        $username = Config::$username;
-        $password = Config::$password;
-        $db = Config::$database;
+//        echo '<h1>GETTING SOMETHING FORM DB</h1>';
 
-        // Create connection
-        $conn = new mysqli($host, $username, $password, $db);
+        if(Database::$connection == null) {
+            $host = Config::$database_host;
+            $username = Config::$username;
+            $password = Config::$password;
+            $db = Config::$database;
 
-        // Check connection
-        if ($conn->error) {
-            die("DB connection failed. Error " . $conn->connect_errno . " " . $conn->connect_error);
+            // Create connection
+            $conn = new mysqli($host, $username, $password, $db);
+
+            // Check connection
+            if ($conn->error) {
+                die("DB connection failed. Error " . $conn->connect_errno . " " . $conn->connect_error);
+            }
+            Database::$connection = $conn;
         }
-        return $conn;
+        return Database::$connection;
+    }
+
+    public static function closeConnection() {
+        if(Database::$connection != null) {
+            Database::$connection->close();
+        }
     }
 
     public static function createUser($email, $hashed_pw) {
@@ -39,7 +51,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
 
@@ -72,7 +84,7 @@ class Database {
         }
 
 
-        $conn->close();
+
 
         return $userObj;
     }
@@ -99,12 +111,13 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
 
     }
 
 
     public static function getPosts() {
+
         // Connect to db
         $conn = Database::connectToDatabase();
 
@@ -119,10 +132,15 @@ class Database {
         $posts = array();
 
         while ($row = $result->fetch_assoc()) {
-            array_push($posts, $row);
+//            array_push($posts, $row);
+
+            // TODO object oriented handling of entities
+            $author = new User($row['user_id'], $row['author'], '');
+            $post = new Post($row['post_id'], $author, $row['content'], $row['date']);
+            array_push($posts, $post);
         }
         // Close connection
-        $conn->close();
+
         return $posts;
 
     }
@@ -143,7 +161,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
     public static function deletePost($post_id) {
@@ -161,7 +179,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
     public static function getProfile($user_id) {
@@ -193,7 +211,7 @@ class Database {
         }
 
 
-        $conn->close();
+
 
         return $profile_obj;
     }
@@ -218,7 +236,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
 }

@@ -42,9 +42,10 @@ class ProfileController
                 ? EncryptionManager::generateNameFromIv() . $session->get(Properties::ID) . "." . $image_file_type
                 : $session->get(Properties::PROFILE_PICTIRE_NAME);
 
+
             if ($is_profile_valid) {
                 // If everything is ok, try to upload file
-                if (upload($file["tmp_name"], $file_name)) {
+                if (ImageManager::uploadImage($file["tmp_name"], $file_name)) {
                     $this->model->message_upload .= "The file " . basename($file["name"]) . " has been uploaded. ";
 
                     // If upload was successful, update the db

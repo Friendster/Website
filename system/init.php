@@ -46,3 +46,7 @@ include "../app/view/LoginView.php";
 include "../app/controller/RegisterController.php";
 include "../app/model/RegisterModel.php";
 include "../app/view/RegisterView.php";
+
+include "../app/controller/ProfileController.php";
+include "../app/model/ProfileModel.php";
+include "../app/view/ProfileView.php";

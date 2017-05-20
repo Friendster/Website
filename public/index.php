@@ -39,14 +39,21 @@ if (is_page('image')) {
 
     } else if (is_logged_in()) {
 
-        if(isset($_GET['page'])) {
+        if (isset($_GET['page'])) {
             // Generic page
             include('../app/' . $_GET['page'] . '.php');
         } else {
 
+
             // Include frontpage
             include "../system/navigation.php";
-            include "../app/profile_header.php";
+            $profile_model = new ProfileModel();
+            $profile_controller = new ProfileController($profile_model);
+            $profile_controller->onProfile();
+
+            $profile_view = new ProfileView($profile_controller, $profile_model);
+
+            echo $profile_view->output();
             include "../app/post_page.php";
         }
 
@@ -57,12 +64,14 @@ if (is_page('image')) {
 }
 
 
-function is_logged_in() {
+function is_logged_in()
+{
     global $session;
     return $session->get(Properties::ID) != null;
 }
 
-function is_page($name) {
+function is_page($name)
+{
     return isset($_GET['page']) && $_GET['page'] == $name;
 }
 

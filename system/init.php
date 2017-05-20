@@ -25,11 +25,6 @@ if ($session->get(Properties::TOKEN) == null) {
 include "Config.php";
 include "Database.php";
 
-
-
-include "../app/image_upload.php";
-
-
 function navigate_to($query = "")
 {
     $root_location = (Config::$host != "localhost") ? "/" : "index.php". $query;

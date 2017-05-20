@@ -1,11 +1,15 @@
 <?php
 include "../system/init.php";
 
+$app_model = new AppModel();
+$app_controller = new AppController($app_model);
+$app_view = new AppView($app_controller, $app_model);
+
 if (is_page('image')) {
-    include "../app/image.php";
+    echo ImageManager::serveImage($_GET["file"]);
 } else {
 
-    include "../system/header.php";
+    echo $app_view->outputHeader();
     if (is_page('register') && !is_logged_in()) {
 
         // Register page
@@ -47,6 +51,9 @@ if (is_page('image')) {
 
             // Include frontpage
             include "../system/navigation.php";
+
+
+
             $profile_model = new ProfileModel();
             $profile_controller = new ProfileController($profile_model);
             $profile_controller->onProfile();
@@ -54,12 +61,21 @@ if (is_page('image')) {
             $profile_view = new ProfileView($profile_controller, $profile_model);
 
             echo $profile_view->output();
-            include "../app/post_page.php";
+
+
+            $post_model = new PostModel();
+            $post_controller = new PostController($post_model);
+            $post_controller->onCreate();
+            $post_controller->onEdit();
+            $post_controller->onDelete();
+            $post_view = new PostView($post_controller, $post_model);
+            echo $post_view->output();
         }
 
     }
 
-    include "../system/footer.php";
+    echo $app_view->outputFooter();
+    Database::closeConnection();
 
 }
 

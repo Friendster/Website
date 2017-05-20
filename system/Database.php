@@ -7,23 +7,33 @@
  */
 // TODO UPDATE TO PDO
 class Database {
-
+    private static $connection;
+    
     private static function connectToDatabase() {
 //        echo '<h1>GETTING SOMETHING FORM DB</h1>';
 
-        $host = Config::$database_host;
-        $username = Config::$username;
-        $password = Config::$password;
-        $db = Config::$database;
+        if(Database::$connection == null) {
+            $host = Config::$database_host;
+            $username = Config::$username;
+            $password = Config::$password;
+            $db = Config::$database;
 
-        // Create connection
-        $conn = new mysqli($host, $username, $password, $db);
+            // Create connection
+            $conn = new mysqli($host, $username, $password, $db);
 
-        // Check connection
-        if ($conn->error) {
-            die("DB connection failed. Error " . $conn->connect_errno . " " . $conn->connect_error);
+            // Check connection
+            if ($conn->error) {
+                die("DB connection failed. Error " . $conn->connect_errno . " " . $conn->connect_error);
+            }
+            Database::$connection = $conn;
         }
-        return $conn;
+        return Database::$connection;
+    }
+
+    public static function closeConnection() {
+        if(Database::$connection != null) {
+            Database::$connection->close();
+        }
     }
 
     public static function createUser($email, $hashed_pw) {
@@ -41,7 +51,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
 
@@ -74,7 +84,7 @@ class Database {
         }
 
 
-        $conn->close();
+
 
         return $userObj;
     }
@@ -101,7 +111,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
 
     }
 
@@ -130,7 +140,7 @@ class Database {
             array_push($posts, $post);
         }
         // Close connection
-        $conn->close();
+
         return $posts;
 
     }
@@ -151,7 +161,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
     public static function deletePost($post_id) {
@@ -169,7 +179,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
     public static function getProfile($user_id) {
@@ -201,7 +211,7 @@ class Database {
         }
 
 
-        $conn->close();
+
 
         return $profile_obj;
     }
@@ -226,7 +236,7 @@ class Database {
             $stmt->close();
         }
 
-        $conn->close();
+
     }
 
 }

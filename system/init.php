@@ -2,6 +2,11 @@
 /**
  * This file should use the db, create the session, config,
  */
+include "../app/entities/User.php";
+include "../app/entities/Post.php";
+
+
+
 
 include "../system/session/Properties.php";
 include "../system/session/SessionManager.php";
@@ -42,3 +47,9 @@ include "../app/view/LoginView.php";
 include "../app/controller/RegisterController.php";
 include "../app/model/RegisterModel.php";
 include "../app/view/RegisterView.php";
+
+
+include "../app/controller/PostController.php";
+include "../app/model/PostModel.php";
+include "../app/view/PostView.php";
+

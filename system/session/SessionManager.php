@@ -33,7 +33,7 @@ class SessionManager {
 
             // last request was more than 10 minutes ago
             session_unset();     // unset $_SESSION variable for the run-time
-            session_destroy();   // destroy session data in storage
+            session_destroy();   // destroy session entities in storage
         }
         $this->set(Properties::LAST_ACTIVITY, time()); // update last activity time stamp
     }

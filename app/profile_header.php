@@ -34,13 +34,13 @@ include "profile_upload.php";
     if (!empty($error_upload)) {
         echo
             '<div class="alert alert-dismissible alert-danger">' .
-            '   <button type="button" class="close" data-dismiss="alert">&times;</button>' .
+            '   <button type="button" class="close" entities-dismiss="alert">&times;</button>' .
             '   <strong>Oh snap! </strong>' . htmlentities($error_upload) .
             '</div>';
     } else if (isset($_GET['success'])) {
         echo
             '<div class="alert alert-dismissible alert-success">' .
-            '   <button type="button" class="close" data-dismiss="alert">&times;</button>' .
+            '   <button type="button" class="close" entities-dismiss="alert">&times;</button>' .
             '   <strong>Well done! </strong>' . htmlentities(urldecode($_GET['success'])) .
             '</div>';
     }

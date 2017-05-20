@@ -5,7 +5,13 @@ if (is_page('image')) {
     echo ImageManager::serveImage($_GET["file"]);
 } else {
 
-    include "../system/header.php";
+    $app_model = new AppModel();
+    $app_controller = new AppController($app_model);
+    $app_view = new AppView($app_controller, $app_model);
+
+
+    echo $app_view->outputHeader();
+
     if (is_page('register') && !is_logged_in()) {
 
         // Register page
@@ -20,7 +26,8 @@ if (is_page('image')) {
         echo $register_view->output();
 
 
-    } else if (is_page('login') || !is_logged_in()) {
+    }
+    else if (is_page('login') || !is_logged_in()) {
         // Login page
 
         $login_model = new LoginModel();
@@ -37,7 +44,8 @@ if (is_page('image')) {
 
         echo $login_view->output();
 
-    } else if (is_logged_in()) {
+    }
+    else if (is_logged_in()) {
 
         if(isset($_GET['page'])) {
             // Generic page
@@ -64,7 +72,7 @@ if (is_page('image')) {
 
     }
 
-    include "../system/footer.php";
+    echo $app_view->outputFooter();
 
 }
 

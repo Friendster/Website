@@ -40,6 +40,10 @@ include "RecaptchaManager.php";
 include "ValidationManager.php";
 include "ImageManager.php";
 
+include "../app/controller/AppController.php";
+include "../app/model/AppModel.php";
+include "../app/view/AppView.php";
+
 include "../app/controller/LoginController.php";
 include "../app/model/LoginModel.php";
 include "../app/view/LoginView.php";

@@ -34,7 +34,7 @@ class User {
      * @param mixed $id
      */
     public function setId($id) {
-        $this->id = $id;
+        $this->id = htmlentities($id);
     }
 
     /**
@@ -48,7 +48,7 @@ class User {
      * @param mixed $email
      */
     public function setEmail($email) {
-        $this->email = $email;
+        $this->email = htmlentities($email);
     }
 
     /**
@@ -62,7 +62,7 @@ class User {
      * @param mixed $name
      */
     public function setName($name) {
-        $this->name = $name;
+        $this->name = htmlentities($name);
     }
 
 }

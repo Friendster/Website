@@ -51,7 +51,7 @@ class LoginView {
                         
                         <div class="'. (!empty($recaptcha_error) ? 'recapcha-error' : '') . '">' .
                             $recaptcha_error .
-                            '<div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
+                            '<div class="g-recaptcha" entities-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
                         </div>
                         <input type="hidden" name="token" value="'.$session->get(Properties::TOKEN).'">
                         <div class="form-buttons">

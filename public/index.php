@@ -47,7 +47,19 @@ if (is_page('image')) {
             // Include frontpage
             include "../system/navigation.php";
             include "../app/profile_header.php";
-            include "../app/post_page.php";
+//            include "../app/post_page.php";
+
+
+
+            $post_model = new PostModel();
+            $post_controller = new PostController($post_model);
+
+            $post_controller->onCreate();
+            $post_controller->onEdit();
+            $post_controller->onDelete();
+
+            $post_view = new PostView($post_controller, $post_model);
+            echo $post_view->output();
         }
 
     }

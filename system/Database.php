@@ -9,6 +9,8 @@
 class Database {
 
     private static function connectToDatabase() {
+//        echo '<h1>GETTING SOMETHING FORM DB</h1>';
+
         $host = Config::$database_host;
         $username = Config::$username;
         $password = Config::$password;
@@ -105,6 +107,7 @@ class Database {
 
 
     public static function getPosts() {
+
         // Connect to db
         $conn = Database::connectToDatabase();
 
@@ -119,7 +122,12 @@ class Database {
         $posts = array();
 
         while ($row = $result->fetch_assoc()) {
-            array_push($posts, $row);
+//            array_push($posts, $row);
+
+            // TODO object oriented handling of entities
+            $author = new User($row['user_id'], $row['author'], '');
+            $post = new Post($row['post_id'], $author, $row['content'], $row['date']);
+            array_push($posts, $post);
         }
         // Close connection
         $conn->close();

@@ -21,10 +21,10 @@ class Post {
      * @param $date
      */
     public function __construct($id, User $author, $content, $date) {
-        $this->id = $id;
-        $this->author = $author;
-        $this->content = $content;
-        $this->date = $date;
+        $this->setId($id);
+        $this->setAuthor($author);
+        $this->setContent($content);
+        $this->setDate($date);
     }
 
     /**
@@ -38,13 +38,13 @@ class Post {
      * @param mixed $id
      */
     public function setId($id) {
-        $this->id = $id;
+        $this->id = htmlentities($id);
     }
 
     /**
      * @return mixed
      */
-    public function getAuthor() {
+    public function getAuthor() : User {
         return $this->author;
     }
 
@@ -66,7 +66,7 @@ class Post {
      * @param mixed $content
      */
     public function setContent($content) {
-        $this->content = $content;
+        $this->content = htmlentities($content);
     }
 
     /**
@@ -80,7 +80,7 @@ class Post {
      * @param mixed $date
      */
     public function setDate($date) {
-        $this->date = $date;
+        $this->date = htmlentities($date);
     }
 
 

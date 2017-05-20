@@ -1,14 +1,13 @@
 <?php
 include "../system/init.php";
 
+$app_model = new AppModel();
+$app_controller = new AppController($app_model);
+$app_view = new AppView($app_controller, $app_model);
+
 if (is_page('image')) {
     echo ImageManager::serveImage($_GET["file"]);
 } else {
-
-    $app_model = new AppModel();
-    $app_controller = new AppController($app_model);
-    $app_view = new AppView($app_controller, $app_model);
-
 
     echo $app_view->outputHeader();
 
@@ -73,6 +72,8 @@ if (is_page('image')) {
     }
 
     echo $app_view->outputFooter();
+
+    Database::closeConnection();
 
 }
 

@@ -37,4 +37,9 @@ class LoginController {
         }
     }
 
+    public function onLogout() {
+        global $session;
+        $session->logout();
+    }
+
 }

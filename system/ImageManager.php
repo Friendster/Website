@@ -12,7 +12,7 @@ class ImageManager {
     public static function serveImage($file) {
         global $session;
 
-        $iv = $session->get(Properties::IV);
+        $iv = $session->get(Session::IV);
         $file_name = urldecode(EncryptionManager::decrypt($file, $iv));
         $file_name = ImageManager::sanitizeImageName($file_name);
         $target_file = "../../uploads/" . $file_name;

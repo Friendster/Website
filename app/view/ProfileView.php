@@ -14,17 +14,17 @@ class ProfileView
 
     public function output()
     {
-        $message = !empty($this->model->error_upload)
+        $message = !empty($this->model->getErrorUpload())
             ? '<div class="alert alert-dismissible alert-danger">
                            <button type="button" class="close" data-dismiss="alert">&times;</button>\
-                           <strong>Oh snap! </strong>' . htmlentities($this->model->error_upload) . '
+                           <strong>Oh snap! </strong>' . $this->model->getErrorUpload() . '
                         </div>'
-            : isset($_GET['success'])
-                ? '<div class="alert alert-dismissible alert-success">
-                          <button type="button" class="close" data-dismiss="alert">&times;</button>
-                          <strong>Well done! </strong>' . htmlentities(urldecode($_GET['success'])) . '
-                        </div>'
-                : "";
+            : (!empty($this->model->getSuccessUpload())
+                ? '<form action="#" method="post" class="alert alert-dismissible alert-success">
+                          <button type="submit" name="notification_close" class="close"  >&times;</button>
+                          <strong>Well done! </strong>' . $this->model->getSuccessUpload() . '
+                        </form>'
+                : "");
 
         $template =
             '<div class="container-fluid nopadding cover">
@@ -32,7 +32,7 @@ class ProfileView
                     <div class="panel panel-default profile">
                         <div class="panel-body">
                             <a href="#modal" data-toggle="modal">
-                                <img src=' . $this->model->image_path . ' alt="">
+                                <img src=' . $this->model->getImagePath() . ' alt="">
                             </a>
                         </div>
                     </div>

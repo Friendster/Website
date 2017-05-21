@@ -15,7 +15,7 @@ class RegisterController {
 
     public function onRegister() {
         global $session;
-        if (isset($_POST["register"]) && $_POST["token"] == $session->get(Properties::TOKEN)) {
+        if (isset($_POST["register"]) && $_POST["token"] == $session->get(Session::TOKEN)) {
             $this->model->setEmail($_POST["email"]);
             $this->model->setPassword($_POST["password"]);
             $this->model->setPasswordVerify($_POST["password_verify"]);

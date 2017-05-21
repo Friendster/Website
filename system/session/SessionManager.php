@@ -16,35 +16,35 @@ class SessionManager {
 
     public function tryRegenerateSession() {
         //Regenerate session every 5 minutes
-        if (null == $this->get(Properties::CREATED)) {
-            $this->set(Properties::CREATED, time());
-        } else if ((time() - $this->get(Properties::CREATED) > 100) && $this->get(Properties::EMAIL) != 'cma') {
-            echo $this->get(Properties::NAME);
+        if (null == $this->get(Session::CREATED)) {
+            $this->set(Session::CREATED, time());
+        } else if ((time() - $this->get(Session::CREATED) > 100) && $this->get(Session::EMAIL) != 'cma') {
+            echo $this->get(Session::NAME);
             // session started more than 5 minutes ago
             session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
-            $this->set(Properties::CREATED, time());  // update creation time
+            $this->set(Session::CREATED, time());  // update creation time
         }
     }
 
     public function tryDestroySession() {
 
         //Destroy session if last activity was 10 minutes ago
-        if (null != $this->get(Properties::LAST_ACTIVITY) && (time() - $this->get(Properties::LAST_ACTIVITY) > 600) && $this->get(Properties::EMAIL) != 'cma') {
+        if (null != $this->get(Session::LAST_ACTIVITY) && (time() - $this->get(Session::LAST_ACTIVITY) > 600) && $this->get(Session::EMAIL) != 'cma') {
 
             // last request was more than 10 minutes ago
             session_unset();     // unset $_SESSION variable for the run-time
             session_destroy();   // destroy session entities in storage
         }
-        $this->set(Properties::LAST_ACTIVITY, time()); // update last activity time stamp
+        $this->set(Session::LAST_ACTIVITY, time()); // update last activity time stamp
     }
 
     public function login($profile) {
-        $this->set(Properties::ID, $profile->id);
-        $this->set(Properties::NAME, $profile->name);
-        $this->set(Properties::EMAIL, $profile->email);
-        $this->set(Properties::PROFILE_PICTIRE_NAME, $profile->profile_picture_name);
+        $this->set(Session::ID, $profile->id);
+        $this->set(Session::NAME, $profile->name);
+        $this->set(Session::EMAIL, $profile->email);
+        $this->set(Session::PROFILE_PICTIRE_NAME, $profile->profile_picture_name);
 
-        navigate_to();
+        navigate();
     }
 
     public function logout() {
@@ -53,16 +53,16 @@ class SessionManager {
         $_SESSION = array();
         session_destroy();
 
-        navigate_to();
+        navigate();
     }
 
     public function printSession() {
-        echo Properties::ID . ' = ' . $this->get(Properties::ID) . '<br>';
-        echo Properties::EMAIL . ' = ' . $this->get(Properties::EMAIL) . '<br>';
-        echo Properties::NAME . ' = ' . $this->get(Properties::NAME) . '<br>';
-        echo Properties::PROFILE_PICTIRE_NAME . ' = ' . $this->get(Properties::PROFILE_PICTIRE_NAME) . '<br>';
-        echo Properties::TOKEN . ' = ' . $this->get(Properties::TOKEN) . '<br>';
-        echo Properties::CREATED . ' = ' . $this->get(Properties::CREATED) . '<br>';
-        echo Properties::LAST_ACTIVITY . ' = ' . $this->get(Properties::LAST_ACTIVITY) . '<br>';
+        echo Session::ID . ' = ' . $this->get(Session::ID) . '<br>';
+        echo Session::EMAIL . ' = ' . $this->get(Session::EMAIL) . '<br>';
+        echo Session::NAME . ' = ' . $this->get(Session::NAME) . '<br>';
+        echo Session::PROFILE_PICTIRE_NAME . ' = ' . $this->get(Session::PROFILE_PICTIRE_NAME) . '<br>';
+        echo Session::TOKEN . ' = ' . $this->get(Session::TOKEN) . '<br>';
+        echo Session::CREATED . ' = ' . $this->get(Session::CREATED) . '<br>';
+        echo Session::LAST_ACTIVITY . ' = ' . $this->get(Session::LAST_ACTIVITY) . '<br>';
     }
 }

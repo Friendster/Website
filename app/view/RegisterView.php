@@ -54,7 +54,7 @@ class RegisterView {
                             '<div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
                         </div>
                         
-                        <input type="hidden" name="token" value="' . $session->get(Properties::TOKEN) . '">
+                        <input type="hidden" name="token" value="' . $session->get(Session::TOKEN) . '">
                         
                         <div class="form-buttons">
                             <button type="submit" name="register" class="btn btn-primary">Register</button>

@@ -15,9 +15,9 @@ class PostModel {
     public function __construct() {
         global $session;
 
-        $this->setUserName($session->get(Properties::EMAIL));
-        $this->setUserId($session->get(Properties::ID));
-        $this->iv = $session->get(Properties::IV);
+        $this->setUserName($session->get(Session::EMAIL));
+        $this->setUserId($session->get(Session::ID));
+        $this->iv = $session->get(Session::IV);
         $this->posts = Database::getPosts();
     }
 

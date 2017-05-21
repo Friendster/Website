@@ -11,19 +11,19 @@ if (is_page('image')) {
 
     echo $app_view->outputHeader();
 
-    if (is_page('register') && !is_logged_in()) {
+    if (is_page('register') && ! $session->isLoggedIn()) {
 
         mvc(Router::$register, Action::$onRegister);
 
-    } else if (is_page('login') || !is_logged_in()) {
+    } else if (is_page('login') || !$session->isLoggedIn()) {
         // Login page
-        if (is_logged_in()) {
+        if ($session->isLoggedIn()) {
             mvc(Router::$login, Action::$onLogout);
         } else {
             mvc(Router::$login, Action::$onLogin);
         }
 
-    } else if (is_logged_in()) {
+    } else if ($session->isLoggedIn()) {
 
         // Include frontpage
         echo $app_view->outputNavbar();
@@ -35,12 +35,6 @@ if (is_page('image')) {
     echo $app_view->outputFooter();
     Database::closeConnection();
 
-}
-
-
-function is_logged_in() {
-    global $session;
-    return $session->get(Session::ID) != null;
 }
 
 function mvc($feature, $action) {

@@ -17,7 +17,7 @@ class ProfileController
             $file = $_FILES["profile"];
             $isUploaded = $this->model->tryUploadProfile($file);
             if ($isUploaded) {
-                navigate();
+                RouteManager::navigate();
             }
         }
         if (isset($_POST["notification_close"])) {

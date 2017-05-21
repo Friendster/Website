@@ -44,7 +44,7 @@ class SessionManager {
         $this->set(Session::EMAIL, $profile->email);
         $this->set(Session::PROFILE_PICTIRE_NAME, $profile->profile_picture_name);
 
-        navigate();
+        RouteManager::navigate();
     }
 
     public function logout() {
@@ -53,7 +53,7 @@ class SessionManager {
         $_SESSION = array();
         session_destroy();
 
-        navigate();
+        RouteManager::navigate();
     }
 
     public function isLoggedIn() {

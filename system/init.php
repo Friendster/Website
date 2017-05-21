@@ -5,8 +5,8 @@
 include "../app/entities/User.php";
 include "../app/entities/Post.php";
 
-include "../system/session/Session.php";
-include "../system/session/SessionManager.php";
+include "../app/entities/Session.php";
+include "../system/SessionManager.php";
 
 
 
@@ -24,7 +24,7 @@ if ($session->get(Session::TOKEN) == null) {
 }
 
 
-include "Config.php";
+include "../app/entities/Config.php";
 include "Database.php";
 
 

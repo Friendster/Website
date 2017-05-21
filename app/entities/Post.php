@@ -31,14 +31,14 @@ class Post {
      * @return mixed
      */
     public function getId() {
-        return $this->id;
+        return htmlentities($this->id);
     }
 
     /**
      * @param mixed $id
      */
     public function setId($id) {
-        $this->id = htmlentities($id);
+        $this->id = $id;
     }
 
     /**
@@ -59,28 +59,28 @@ class Post {
      * @return mixed
      */
     public function getContent() {
-        return $this->content;
+        return htmlentities($this->content);
     }
 
     /**
      * @param mixed $content
      */
     public function setContent($content) {
-        $this->content = htmlentities($content);
+        $this->content = $content;
     }
 
     /**
      * @return mixed
      */
     public function getDate() {
-        return $this->date;
+        return htmlentities($this->date);
     }
 
     /**
      * @param mixed $date
      */
     public function setDate($date) {
-        $this->date = htmlentities($date);
+        $this->date = $date;
     }
 
 

@@ -64,19 +64,19 @@ class LoginModel {
     }
 
     public function getEmail() {
-        return $this->email;
+        return htmlentities($this->email);
     }
 
     public function setEmail($email) {
-        $this->email = htmlspecialchars($email);
+        $this->email = $email;
     }
 
     public function getPassword() {
-        return $this->password;
+        return htmlentities($this->password);
     }
 
     public function setPassword($password) {
-        $this->password = htmlspecialchars($password);
+        $this->password = $password;
     }
 
 

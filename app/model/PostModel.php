@@ -75,28 +75,28 @@ class PostModel {
      * @return null|string
      */
     public function getUserName() {
-        return $this->userName;
+        return htmlentities($this->userName);
     }
 
     /**
      * @param null|string $userName
      */
     public function setUserName($userName) {
-        $this->userName = htmlentities($userName);
+        $this->userName = $userName;
     }
 
     /**
      * @return null|string
      */
     public function getUserId() {
-        return $this->userId;
+        return htmlentities($this->userId);
     }
 
     /**
      * @param null|string $userId
      */
     public function setUserId($userId) {
-        $this->userId = htmlentities($userId);
+        $this->userId = $userId;
     }
 
     /**

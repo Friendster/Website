@@ -27,42 +27,42 @@ class User {
      * @return mixed
      */
     public function getId() {
-        return $this->id;
+        return htmlentities($this->id);
     }
 
     /**
      * @param mixed $id
      */
     public function setId($id) {
-        $this->id = htmlentities($id);
+        $this->id = $id;
     }
 
     /**
      * @return mixed
      */
     public function getEmail() {
-        return $this->email;
+        return htmlentities($this->email);
     }
 
     /**
      * @param mixed $email
      */
     public function setEmail($email) {
-        $this->email = htmlentities($email);
+        $this->email = $email;
     }
 
     /**
      * @return mixed
      */
     public function getName() {
-        return $this->name;
+        return htmlentities($this->name);
     }
 
     /**
      * @param mixed $name
      */
     public function setName($name) {
-        $this->name = htmlentities($name);
+        $this->name = $name;
     }
 
 }

@@ -72,98 +72,98 @@ class RegisterModel {
      * @return string
      */
     public function getEmail() {
-        return $this->email;
+        return htmlentities($this->email);
     }
 
     /**
      * @param string $email
      */
     public function setEmail($email) {
-        $this->email = htmlentities($email);
+        $this->email = $email;
     }
 
     /**
      * @return string
      */
     public function getPassword() {
-        return $this->password;
+        return htmlentities($this->password);
     }
 
     /**
      * @param string $password
      */
     public function setPassword($password) {
-        $this->password = htmlentities($password);
+        $this->password = $password;
     }
 
     /**
      * @return string
      */
     public function getPasswordVerify() {
-        return $this->passwordVerify;
+        return htmlentities($this->passwordVerify);
     }
 
     /**
      * @param string $passwordVerify
      */
     public function setPasswordVerify($passwordVerify) {
-        $this->passwordVerify = htmlentities($passwordVerify);
+        $this->passwordVerify = $passwordVerify;
     }
 
     /**
      * @return string
      */
     public function getEmailError() {
-        return $this->emailError;
+        return htmlentities($this->emailError);
     }
 
     /**
      * @param string $emailError
      */
     public function setEmailError($emailError) {
-        $this->emailError = htmlentities($emailError);
+        $this->emailError = $emailError;
     }
 
     /**
      * @return string
      */
     public function getPasswordError() {
-        return $this->passwordError;
+        return htmlentities($this->passwordError);
     }
 
     /**
      * @param string $passwordError
      */
     public function setPasswordError($passwordError) {
-        $this->passwordError = htmlentities($passwordError);
+        $this->passwordError = $passwordError;
     }
 
     /**
      * @return string
      */
     public function getPasswordVerifyError() {
-        return $this->passwordVerifyError;
+        return htmlentities($this->passwordVerifyError);
     }
 
     /**
      * @param string $passwordVerifyError
      */
     public function setPasswordVerifyError($passwordVerifyError) {
-        $this->passwordVerifyError = htmlentities($passwordVerifyError);
+        $this->passwordVerifyError = $passwordVerifyError;
     }
 
     /**
      * @return string
      */
     public function getRecaptchaError() {
-        return $this->recaptchaError;
+        return htmlentities($this->recaptchaError);
     }
 
     /**
      * @param string $recaptchaError
      */
     public function setRecaptchaError($recaptchaError) {
-        $this->recaptchaError = htmlentities($recaptchaError);
+        $this->recaptchaError = $recaptchaError;
     }
 
 

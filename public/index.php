@@ -50,7 +50,7 @@ if (is_page('image')) {
 
 
             // Include frontpage
-            include "../system/navigation.php";
+            echo $app_view->outputNavbar();
 
 
 

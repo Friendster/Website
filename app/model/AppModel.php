@@ -13,4 +13,10 @@ class AppModel {
 
         return $link;
     }
+
+    public function getUser() {
+        global $session;
+
+        return htmlentities($session->get(Session::EMAIL));
+    }
 }

@@ -53,7 +53,7 @@ class LoginView {
                             $recaptcha_error .
                             '<div class="g-recaptcha" data-sitekey="6LcpFBoUAAAAAOCkYXYqvLNlnrFzXMn3DrSDdHzD"></div>
                         </div>
-                        <input type="hidden" name="token" value="'.$session->get(Properties::TOKEN).'">
+                        <input type="hidden" name="token" value="'.$session->get(Session::TOKEN).'">
                         <div class="form-buttons">
                             <button type="submit" name="login" class="btn btn-primary">Login</button>
                             <a class="btn btn-default" href="?page=register">Register?</a>

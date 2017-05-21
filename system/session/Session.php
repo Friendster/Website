@@ -1,6 +1,6 @@
 <?php
 
-abstract class Properties {
+abstract class Session {
     const ID = 'ID';
     const EMAIL = 'EMAIL';
     const NAME = 'NAME';
@@ -9,4 +9,5 @@ abstract class Properties {
     const CREATED = 'CREATED';
     const LAST_ACTIVITY = 'LAST_ACTIVITY';
     const IV = 'IV';
+    const NOTIFICATION = 'NOTIFICATION';
 }

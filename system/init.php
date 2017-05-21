@@ -5,7 +5,7 @@
 include "../app/entities/User.php";
 include "../app/entities/Post.php";
 
-include "../system/session/Properties.php";
+include "../system/session/Session.php";
 include "../system/session/SessionManager.php";
 
 
@@ -16,11 +16,11 @@ $session->tryDestroySession();
 $session->tryRegenerateSession();
 include "EncryptionManager.php";
 // Set static IV
-if ($session->get(Properties::IV) == null) {
-    $session->set(Properties::IV, EncryptionManager::generateIv());
+if ($session->get(Session::IV) == null) {
+    $session->set(Session::IV, EncryptionManager::generateIv());
 }
-if ($session->get(Properties::TOKEN) == null) {
-    $session->set(Properties::TOKEN, EncryptionManager::generateNameFromIv());
+if ($session->get(Session::TOKEN) == null) {
+    $session->set(Session::TOKEN, EncryptionManager::generateNameFromIv());
 }
 
 
@@ -29,7 +29,7 @@ include "Database.php";
 
 
 
-function navigate_to($query = "")
+function navigate($query = "")
 {
     $root_location = (Config::$host != "localhost") ? "/" : "index.php". $query;
     header("Location:" . $root_location);

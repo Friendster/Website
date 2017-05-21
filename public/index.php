@@ -83,7 +83,7 @@ if (is_page('image')) {
 function is_logged_in()
 {
     global $session;
-    return $session->get(Properties::ID) != null;
+    return $session->get(Session::ID) != null;
 }
 
 function is_page($name)

@@ -56,6 +56,10 @@ class SessionManager {
         navigate();
     }
 
+    public function isLoggedIn() {
+        return ($this->get(Session::ID) != null);
+    }
+
     public function printSession() {
         echo Session::ID . ' = ' . $this->get(Session::ID) . '<br>';
         echo Session::EMAIL . ' = ' . $this->get(Session::EMAIL) . '<br>';

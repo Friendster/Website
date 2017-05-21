@@ -22,7 +22,7 @@ class PostController {
     }
 
     public function onCreate() {
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['create'])) {
             $this->model->createPost($_POST['content']);
             navigate();
 

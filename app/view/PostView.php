@@ -39,7 +39,7 @@ class PostView {
                          <textarea placeholder="Add a new post" name="content" class="form-control" rows="3" id="textArea"></textarea>
                     </div>
                     <div class="form-group">
-                        <button name="submit" type="submit" class="btn btn-primary">Post</button>
+                        <button name="create" type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </form>
             </div>

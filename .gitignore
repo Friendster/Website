@@ -1,5 +1,5 @@
 # IDE
 .idea
 .idea_modules/
-system/Config.php
+app/entities/Config.php
 uploads

@@ -1,77 +1,35 @@
 <?php
 include "../system/init.php";
 
-$app_model = new AppModel();
-$app_controller = new AppController($app_model);
-$app_view = new AppView($app_controller, $app_model);
-
 if (is_page('image')) {
     echo ImageManager::serveImage($_GET["file"]);
 } else {
 
+    $app_model = new AppModel();
+    $app_controller = new AppController($app_model);
+    $app_view = new AppView($app_controller, $app_model);
+
     echo $app_view->outputHeader();
+
     if (is_page('register') && !is_logged_in()) {
 
-        // Register page
-//        system "app/register.php";
-
-        $register_model = new RegisterModel();
-        $register_controller = new RegisterController($register_model);
-        $register_controller->onRegister();
-
-        $register_view = new RegisterView($register_controller, $register_model);
-
-        echo $register_view->output();
-
+        mvc(Router::$register, Action::$onRegister);
 
     } else if (is_page('login') || !is_logged_in()) {
         // Login page
-
-        $login_model = new LoginModel();
-
-        $login_controller = new LoginController($login_model);
-
-        $login_view = new LoginView($login_controller, $login_model);
-
         if (is_logged_in()) {
-            $session->logout();
+            mvc(Router::$login, Action::$onLogout);
         } else {
-            $login_controller->onLogin();
+            mvc(Router::$login, Action::$onLogin);
         }
-
-        echo $login_view->output();
 
     } else if (is_logged_in()) {
 
-        if (isset($_GET['page'])) {
-            // Generic page
-            include('../app/' . $_GET['page'] . '.php');
-        } else {
+        // Include frontpage
+        echo $app_view->outputNavbar();
 
-
-            // Include frontpage
-            echo $app_view->outputNavbar();
-
-
-
-            $profile_model = new ProfileModel();
-            $profile_controller = new ProfileController($profile_model);
-            $profile_controller->onProfile();
-
-            $profile_view = new ProfileView($profile_controller, $profile_model);
-
-            echo $profile_view->output();
-
-
-            $post_model = new PostModel();
-            $post_controller = new PostController($post_model);
-            $post_controller->onCreate();
-            $post_controller->onEdit();
-            $post_controller->onDelete();
-            $post_view = new PostView($post_controller, $post_model);
-            echo $post_view->output();
-        }
-
+        mvc(Router::$profile, Action::$onProfile);
+        mvc(Router::$post, get_action());
     }
 
     echo $app_view->outputFooter();
@@ -80,16 +38,44 @@ if (is_page('image')) {
 }
 
 
-function is_logged_in()
-{
+function is_logged_in() {
     global $session;
     return $session->get(Session::ID) != null;
 }
 
-function is_page($name)
-{
-    return isset($_GET['page']) && $_GET['page'] == $name;
+function mvc($feature, $action) {
+    $model = $feature . 'Model';
+    $view = $feature . 'View';
+    $controller = $feature . 'Controller';
+
+    include "../app/model/$model.php";
+    include "../app/controller/$controller.php";
+    include "../app/view/$view.php";
+
+    $m = new $model();
+    $c = new $controller($m);
+    $v = new $view($c, $m);
+
+    if (!empty($action)) {
+        $method = 'on' . $action;
+        $c->$method();
+    }
+
+    echo $v->output();
 }
 
+function is_page($name) {
+    return isset($_GET['page']) && strtolower($_GET['page']) == strtolower($name);
+}
 
+function get_action() {
+    $class = new ReflectionClass('Action');
+    $staticProperties = $class->getStaticProperties();
 
+    foreach ($staticProperties as $propertyName => $value) {
+        $action = strtolower($value);
+        if (isset($_POST[$action])) {
+            return $value;
+        }
+    }
+}

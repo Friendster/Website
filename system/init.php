@@ -39,23 +39,9 @@ include "RecaptchaManager.php";
 include "ValidationManager.php";
 include "ImageManager.php";
 
+include "../app/entities/Action.php";
+include "../app/entities/Router.php";
 
 include "../app/controller/AppController.php";
 include "../app/model/AppModel.php";
 include "../app/view/AppView.php";
-
-include "../app/controller/LoginController.php";
-include "../app/model/LoginModel.php";
-include "../app/view/LoginView.php";
-
-include "../app/controller/RegisterController.php";
-include "../app/model/RegisterModel.php";
-include "../app/view/RegisterView.php";
-
-include "../app/controller/ProfileController.php";
-include "../app/model/ProfileModel.php";
-include "../app/view/ProfileView.php";
-
-include "../app/controller/PostController.php";
-include "../app/model/PostModel.php";
-include "../app/view/PostView.php";

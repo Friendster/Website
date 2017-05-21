@@ -1,5 +1,36 @@
 <?php
-include "../system/init.php";
+include "../app/entities/User.php";
+include "../app/entities/Post.php";
+include "../app/entities/Session.php";
+include "../app/entities/Config.php";
+include "../app/entities/Action.php";
+include "../app/entities/Router.php";
+
+include "../system/SessionManager.php";
+include "../system/RouteManager.php";
+include "../system/EncryptionManager.php";
+include "../system/RecaptchaManager.php";
+include "../system/ValidationManager.php";
+include "../system/ImageManager.php";
+include "../system/Database.php";
+
+include "../app/controller/AppController.php";
+include "../app/model/AppModel.php";
+include "../app/view/AppView.php";
+
+$session = new SessionManager();
+
+$session->tryDestroySession();
+$session->tryRegenerateSession();
+
+// Set static IV
+if ($session->get(Session::IV) == null) {
+    $session->set(Session::IV, EncryptionManager::generateIv());
+}
+if ($session->get(Session::TOKEN) == null) {
+    $session->set(Session::TOKEN, EncryptionManager::generateNameFromIv());
+}
+
 
 if (is_page('image')) {
     echo ImageManager::serveImage($_GET["file"]);

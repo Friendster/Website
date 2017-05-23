@@ -20,17 +20,6 @@ include "../app/view/AppView.php";
 
 $session = new SessionManager();
 
-$session->tryDestroySession();
-$session->tryRegenerateSession();
-
-// Set static IV
-if ($session->get(Session::IV) == null) {
-    $session->set(Session::IV, EncryptionManager::generateIv());
-}
-if ($session->get(Session::TOKEN) == null) {
-    $session->set(Session::TOKEN, EncryptionManager::generateNameFromIv());
-}
-
 
 if (is_page('image')) {
     echo ImageManager::serveImage($_GET["file"]);
@@ -41,8 +30,8 @@ if (is_page('image')) {
     $app_view = new AppView($app_controller, $app_model);
 
     echo $app_view->outputHeader();
-
-    if (is_page('register') && ! $session->isLoggedIn()) {
+    
+    if (is_page('register') && !$session->isLoggedIn()) {
 
         mvc(Router::$register, Action::$onRegister);
 

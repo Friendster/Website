@@ -4,6 +4,17 @@ class SessionManager {
 
     public function __construct() {
         session_start();
+        $this->tryDestroySession();
+        $this->tryRegenerateSession();
+
+// Set static IV
+        if ($this->get(Session::IV) == null) {
+            $this->set(Session::IV, EncryptionManager::generateIv());
+        }
+        if ($this->get(Session::TOKEN) == null) {
+            $this->set(Session::TOKEN, EncryptionManager::generateNameFromIv());
+        }
+
     }
 
     public function get($property) {

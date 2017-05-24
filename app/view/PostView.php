@@ -31,12 +31,14 @@ class PostView {
     }
 
     private function submitOutput() {
+        global $session;
         return '<div class="panel panel-default">
             <div class="panel-heading">' . $this->model->getUserName() . '</div>
             <div class="panel-body">
                 <form method="post" action="#" autocomplete="off">
                     <div class="form-group">
                          <textarea placeholder="Add a new post" name="content" class="form-control" rows="3" id="textArea"></textarea>
+                         <input type="hidden" name="token" value="'.$session->get(Session::TOKEN).'">
                     </div>
                     <div class="form-group">
                         <button name="create" type="submit" class="btn btn-primary">Post</button>
@@ -67,10 +69,11 @@ class PostView {
     }
 
     private function deleteButtonOutput(Post $post) {
+        global $session;
         return ($this->model->isPostAuthor($post)) ?
             '<form method="post" action="#">
                     <input type="hidden" name="id" value=' . $this->model->getEncryptedPostId($post) . ' />
-
+                    <input type="hidden" name="token" value="'.$session->get(Session::TOKEN).'">
                     <button name="delete" type="submit" class="btn btn-danger pull-right btn-sm gap">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </button>
@@ -88,6 +91,7 @@ class PostView {
     }
 
     private function editModalOutput(Post $post, $modalCount) {
+        global $session;
         return ($this->model->isPostAuthor($post)) ?
             '<div id="edit-modal-' . $modalCount . '" class="modal">
                     <div class="modal-dialog">
@@ -100,6 +104,8 @@ class PostView {
                                 <form action="#" method="post" class="form-vertical">
                                 
                                     <input type="hidden" name="id" value=' . $this->model->getEncryptedPostId($post) . ' />
+                                    <input type="hidden" name="token" value="'.$session->get(Session::TOKEN).'">
+
                                 
                                     <div class="form-group">
                                         <textarea name="edit-content" class="form-control" rows="3" id="edit-text-area">' . $post->getContent() . '</textarea>

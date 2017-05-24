@@ -8,21 +8,25 @@ class PostController {
     }
 
     public function onEdit() {
-        if (isset($_POST["edit"])) {
+        global $session;
+        if (isset($_POST["edit"])&& $_POST["token"] == $session->get(Session::TOKEN)) {
             $this->model->editPost($_POST["id"], $_POST["edit-content"]);
             RouteManager::navigate();
         }
     }
 
     public function onDelete() {
-        if (isset($_POST["delete"])) {
+        global $session;
+        if (isset($_POST["delete"])&& $_POST["token"] == $session->get(Session::TOKEN)) {
             $this->model->deletePost($_POST["id"]);
             RouteManager::navigate();
         }
     }
 
     public function onCreate() {
-        if (isset($_POST['create'])) {
+        global $session;
+
+        if (isset($_POST['create'])&& $_POST["token"] == $session->get(Session::TOKEN)) {
             $this->model->createPost($_POST['content']);
             RouteManager::navigate();
 

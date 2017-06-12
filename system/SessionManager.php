@@ -29,7 +29,7 @@ class SessionManager {
         //Regenerate session every 5 minutes
         if (null == $this->get(Session::CREATED)) {
             $this->set(Session::CREATED, time());
-        } else if ((time() - $this->get(Session::CREATED) > 100) && $this->get(Session::EMAIL) != 'cma') {
+        } else if ((time() - $this->get(Session::CREATED) > 100)) {
             echo $this->get(Session::NAME);
             // session started more than 5 minutes ago
             session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
@@ -40,7 +40,7 @@ class SessionManager {
     public function tryDestroySession() {
 
         //Destroy session if last activity was 10 minutes ago
-        if (null != $this->get(Session::LAST_ACTIVITY) && (time() - $this->get(Session::LAST_ACTIVITY) > 600) && $this->get(Session::EMAIL) != 'cma') {
+        if (null != $this->get(Session::LAST_ACTIVITY) && (time() - $this->get(Session::LAST_ACTIVITY) > 600))  {
 
             // last request was more than 10 minutes ago
             session_unset();     // unset $_SESSION variable for the run-time

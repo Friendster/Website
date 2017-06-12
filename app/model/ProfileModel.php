@@ -31,7 +31,7 @@ class ProfileModel
         if ($is_profile_valid) {
             // If everything is ok, try to upload file
             if (ImageManager::uploadImage($file["tmp_name"], $file_name)) {
-                $this->setSuccessUpload( "The file " . basename($file["name"]) . " has been uploaded. ");
+                $this->setSuccessUpload( "The file " . htmlentities(basename($file["name"])) . " has been uploaded. ");
 
                 // If upload was successful, update the db
                 Database::updateProfilePicture($session->get(Session::ID), $file_name);
@@ -87,7 +87,7 @@ class ProfileModel
         global $session;
 
         $profile = Database::getProfile($session->get(Session::ID));
-        $img_name = empty($profile->profile_picture_name) ? "oOskDVlsS002iszDIcrWqdckY8aM8k.png" : $profile->profile_picture_name;
+        $img_name = empty($profile->profile_picture_name) ?  Config::$defaultImage  : $profile->profile_picture_name;
         $iv = $session->get(Session::IV);
         $encrypted_img_name = urlencode(EncryptionManager::encrypt($img_name, $iv));
 
